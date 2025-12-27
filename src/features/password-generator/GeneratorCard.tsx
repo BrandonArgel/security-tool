@@ -21,6 +21,7 @@ export default function GeneratorCard() {
     crackTime,
     securityLevel,
     securityLevelByScore,
+    regenerate,
     handleLengthChange,
     handleMinNumbersChange,
     handleMinSpecialChange,
@@ -36,7 +37,7 @@ export default function GeneratorCard() {
       </CardHeader>
 
       <CardContent>
-        <PasswordDisplay password={password} />
+        <PasswordDisplay password={password} onRegenerate={regenerate} />
 
         <LengthControl length={length} minLength={MIN_LENGTH} maxLength={MAX_LENGTH} onChange={handleLengthChange} />
 

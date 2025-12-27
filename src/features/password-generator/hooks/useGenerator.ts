@@ -1,6 +1,5 @@
-import { useMemo, useEffect, useRef } from 'react'
+import { useMemo, useEffect, useRef, useCallback, useState } from 'react'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { useDebounce } from '@/hooks/useDebounce'
 import {
   generatePassword,
   getSecurityLevel,
@@ -24,15 +23,32 @@ export const useGenerator = () => {
   const [options, setOptions] = useLocalStorage<GeneratorOptions>('pw_generatorOptions', DEFAULT_OPTIONS)
   const [displaySettings, setDisplaySettings] = useLocalStorage<DisplaySettings>('pw_displaySettings', DEFAULT_SETTINGS)
 
+  const [password, setPassword] = useState<string>('')
+
+  const regenerate = useCallback(() => {
+    const newPassword = generatePassword({ length, ...options })
+    console.log('test')
+
+    if (password) {
+      setHistory((prev) => {
+        if (prev[0] === password) return prev
+        return [password, ...prev].slice(0, 5)
+      })
+    }
+
+    setPassword(newPassword)
+  }, [length, options, password, setHistory])
+
+  useEffect(() => {
+    if (!password) {
+      regenerate()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // --- Generation Logic ---
-  const debouncedLength = useDebounce<number>(length, 150)
   const isFirstRender = useRef(true)
   const lastDisplayedPassword = useRef<string>('')
-
-  // Stable password generation (Derived State)
-  const password = useMemo(() => {
-    return generatePassword({ length: debouncedLength, ...options })
-  }, [debouncedLength, options])
 
   // --- Synchronization of History ---
   useEffect(() => {
@@ -101,6 +117,7 @@ export const useGenerator = () => {
     securityLevel,
     securityLevelByScore,
     // Handlers
+    regenerate,
     handleLengthChange,
     handleMinNumbersChange,
     handleMinSpecialChange,

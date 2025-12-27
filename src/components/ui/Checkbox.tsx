@@ -7,7 +7,7 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox = ({ label, checked, onChange, disabled, ...props }: CheckboxProps) => {
   return (
     <label
-      className={`flex items-center gap-3 select-none transition-opacity ${
+      className={`flex items-center w-fit gap-3 select-none transition-opacity ${
         disabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer group'
       }`}
     >

@@ -2,7 +2,7 @@
 
 import { InputHTMLAttributes, Ref, useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { Button } from './Button'
+import { Button, Tooltip } from '@/components/ui'
 import { cn } from '@/lib'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -30,7 +30,7 @@ export const Input = ({ label, error, className, type = 'text', ref, ...props }:
             'transition-all duration-200 outline-none',
             'focus:border-blue-500 focus:ring-1 focus:ring-blue-500',
             'disabled:opacity-50 disabled:cursor-not-allowed',
-            isPassword && 'pr-10', // Espacio para el botón
+            isPassword && 'pr-10',
             error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
             className
           )}
@@ -38,16 +38,17 @@ export const Input = ({ label, error, className, type = 'text', ref, ...props }:
         />
 
         {isPassword && (
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-gray-500 hover:text-white"
-            title={showPassword ? 'Hide password' : 'Show password'}
-          >
-            {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
-          </Button>
+          <Tooltip content={showPassword ? 'Hide password' : 'Show password'}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-gray-500 hover:text-white"
+            >
+              {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+            </Button>
+          </Tooltip>
         )}
       </div>
 

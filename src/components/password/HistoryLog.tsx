@@ -1,7 +1,7 @@
 // src/modules/password-generator/components/HistoryLog.tsx
 import { motion, AnimatePresence } from 'framer-motion'
 import { Trash2 } from 'lucide-react'
-import { Button } from '@/components/ui'
+import { Button, Tooltip } from '@/components/ui'
 import { HistoryItem } from './HistoryItem'
 
 interface HistoryLogProps {
@@ -26,21 +26,22 @@ export const HistoryLog = ({ history, onClear }: HistoryLogProps) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onClear}
-                className="p-0 text-text-muted hover:text-red-400 transition-colors"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </Button>
+              <Tooltip content="Clear history">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onClear}
+                  className="p-0 text-text-muted hover:text-red-400 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </Button>
+              </Tooltip>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
       <div className="overflow-hidden rounded-xl">
-        {/* El contenedor ahora es quien maneja la transición de altura */}
         <ul className="flex flex-col gap-2 relative">
           <AnimatePresence mode="popLayout" initial={false}>
             {hasHistory ? (

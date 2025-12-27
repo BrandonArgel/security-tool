@@ -1,4 +1,6 @@
 import { Input } from '@/components/ui'
+import { Info } from 'lucide-react'
+import { Tooltip } from '@components/ui'
 import { cn } from '@/lib/cn'
 
 interface LengthControlProps {
@@ -17,18 +19,9 @@ export const LengthControl = ({ length, minLength, maxLength, isControlDisabled,
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Length</span>
 
-            <div className="relative group inline-block">
-              <div className="w-4 h-4 bg-primary/20 text-primary border border-primary/30 rounded-full flex items-center justify-center text-[12px] cursor-help">
-                i
-              </div>
-
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 hidden group-hover:block z-50 pointer-events-none">
-                <div className="relative bg-gray-900 border border-gray-700 text-[11px] text-gray-300 p-2 rounded shadow-2xl">
-                  <p className="w-40 text-center">Passwords with 16+ characters are significantly harder to crack.</p>
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1.25 w-2.5 h-2.5 rotate-45 bg-gray-900 border-r border-b border-gray-700 shadow-xl" />
-                </div>
-              </div>
-            </div>
+            <Tooltip content="Passwords with 16+ characters are significantly harder to crack.">
+              <Info size={16} className="text-primary cursor-help hover:text-primary/80" />
+            </Tooltip>
           </div>
         </div>
         <div className="w-20">

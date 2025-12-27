@@ -32,9 +32,7 @@ export default function ValidatorCard() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <span className="min-w-6 text-center font-mono font-medium text-white bg-gray-800 rounded px-2 py-1">
-            {inputValue.length}
-          </span>
+          <span className="text-sm text-gray-400">{inputValue.length}</span>
         </div>
 
         <div className="space-y-2">
