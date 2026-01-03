@@ -1,13 +1,13 @@
 import { useMemo, useEffect, useRef, useCallback, useState } from 'react'
 import { useDebounce, useLocalStorage } from '@/hooks'
 import {
-  generatePassword,
   getSecurityLevelByTime,
   getSecurityLevelByScore,
-  getStrength,
+  getStrengthScore,
   getTimeToCrack,
   getPasswordFeedback
-} from '../utils/password-utils'
+} from '../utils/metrics'
+import { generatePassword } from '../utils/generator'
 import {
   GeneratorOptions,
   DisplaySettings,
@@ -25,12 +25,12 @@ export const useGenerator = () => {
   })
   const [password, setPassword] = useState<string>('')
 
-  const [savedLength, setSavedLength] = useLocalStorage<number>('pw_length', 16)
+  const [, setSavedLength] = useLocalStorage<number>('pw_length', 16)
   const [history, setHistory] = useLocalStorage<string[]>('pw_history', [])
   const [options, setOptions] = useLocalStorage<GeneratorOptions>('pw_generatorOptions', DEFAULT_OPTIONS)
   const [displaySettings, setDisplaySettings] = useLocalStorage<DisplaySettings>('pw_displaySettings', DEFAULT_SETTINGS)
 
-  const debouncedLength = useDebounce(length, 400)
+  const debouncedLength = useDebounce(length, 500)
   const lastPassword = useRef<string>('')
 
   const regenerate = useCallback(() => {
@@ -100,7 +100,7 @@ export const useGenerator = () => {
     setDisplaySettings((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
-  const score = useMemo(() => getStrength(password), [password])
+  const score = useMemo(() => getStrengthScore(password), [password])
   const crackTime = useMemo(() => getTimeToCrack(password), [password])
   const suggestions = useMemo(() => getPasswordFeedback(password), [password])
   const securityLevel = useMemo(() => getSecurityLevelByTime(crackTime), [crackTime])
