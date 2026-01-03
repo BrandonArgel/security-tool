@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button, Card } from '@components/ui'
 import { cn } from '@/lib'
-import { Home } from 'lucide-react'
 import './globals.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,9 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <nav className="w-full max-w-md mt-10 mb-6 px-4 select-none">
           <Card variant="glass" padding="xs" className="flex justify-center gap-1 border-white/5 rounded-2xl">
             <NavLink href="/" active={pathname === '/'}>
-              <Home size={20} />
-            </NavLink>
-            <NavLink href="/generator" active={pathname === '/generator'}>
               Generator
             </NavLink>
             <NavLink href="/validator" active={pathname === '/validator'}>
