@@ -1,28 +1,54 @@
 import { ChevronDown } from 'lucide-react'
-import { Checkbox } from '@components/ui'
+import { Activity, useId } from 'react'
+import { Button, Card, Checkbox } from '@components/ui'
+import { SettingType } from '@features/password-generator/types'
+import { useActivityMode } from '@/hooks'
 
 interface VisibilitySelectorProps {
   showStrength: boolean
   showCrackTime: boolean
-  onToggle: (_key: 'strength' | 'crackTime') => void
+  onToggle: (_key: SettingType) => void
 }
 
 export const VisibilitySelector = ({ showStrength, showCrackTime, onToggle }: VisibilitySelectorProps) => {
+  const [activityMode, toggle, isOpen] = useActivityMode(false)
+  const contentId = useId()
+
   return (
     <div className="mt-6 border-t border-border pt-4">
-      <details className="group overflow-hidden">
-        <summary className="flex items-center justify-between cursor-pointer list-none text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] hover:text-white transition-all duration-300">
-          <span>Display Settings</span>
-          <div className="flex items-center gap-2">
-            <ChevronDown className="w-3 h-3 transition-transform duration-300 group-open:rotate-180" />
-          </div>
-        </summary>
+      <Button
+        variant="ghost"
+        onClick={toggle}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+        className="flex items-center justify-between w-full p-0 text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] hover:text-white hover:bg-transparent transition-colors duration-300 active:scale-none"
+      >
+        <span>Display Settings</span>
+        <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
+      </Button>
 
-        <div className="grid grid-cols-1 gap-3 mt-4 p-4 rounded-xl border border-border/50 bg-surface/30 transition-all duration-500 ease-in-out opacity-0 -translate-y-2.5 group-open:opacity-100 group-open:translate-y-0">
-          <Checkbox label="Show Strength Meter" checked={showStrength} onChange={() => onToggle('strength')} />
-          <Checkbox label="Show Time to Crack" checked={showCrackTime} onChange={() => onToggle('crackTime')} />
+      <Activity mode={activityMode}>
+        <div
+          id={contentId}
+          hidden={!isOpen}
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'opacity-100 max-h-40 mt-4' : 'opacity-0 max-h-0'
+          }`}
+        >
+          <Card className="p-4 space-y-4 border-border bg-surface/50">
+            <Checkbox
+              label="Show Strength Meter"
+              checked={showStrength}
+              onChange={() => onToggle(SettingType.Strength)}
+            />
+            <Checkbox
+              label="Show Time to Crack"
+              checked={showCrackTime}
+              onChange={() => onToggle(SettingType.CrackTime)}
+            />
+          </Card>
         </div>
-      </details>
+      </Activity>
     </div>
   )
 }

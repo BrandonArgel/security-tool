@@ -10,11 +10,12 @@ import {
 import { generatePassword } from '../utils/generator'
 import {
   GeneratorOptions,
-  DisplaySettings,
   DEFAULT_OPTIONS,
   DEFAULT_SETTINGS,
   MIN_LENGTH,
-  OnOptionChange
+  OnOptionChange,
+  SettingType,
+  type DisplaySettings
 } from '../types'
 
 export const useGenerator = () => {
@@ -96,7 +97,7 @@ export const useGenerator = () => {
     }))
   }
 
-  const toggleDisplay = (key: keyof DisplaySettings) => {
+  const toggleDisplay = (key: SettingType) => {
     setDisplaySettings((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 

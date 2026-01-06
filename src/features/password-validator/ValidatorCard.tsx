@@ -3,10 +3,10 @@ import { Card, CardHeader, CardContent, Input } from '@components/ui'
 import {
   getSecurityLevelByTime,
   getSecurityLevelByScore,
-  getStrength,
+  getStrengthScore,
   getTimeToCrack,
   getPasswordFeedback
-} from '../password-generator/utils/password-utils'
+} from '@features/password-generator/utils/metrics'
 import { PasswordSuggestions, StrengthMeter } from '@components/password'
 import { CrackTime } from '@components/password'
 import { useDebounce } from '@/hooks'
@@ -14,14 +14,14 @@ import { useDebounce } from '@/hooks'
 export default function ValidatorCard() {
   const [password, setPassword] = useState('')
   const debouncedPassword = useDebounce(password, 500)
-  const score = useMemo(() => getStrength(debouncedPassword), [debouncedPassword])
+  const score = useMemo(() => getStrengthScore(debouncedPassword), [debouncedPassword])
   const crackTime = useMemo(() => getTimeToCrack(debouncedPassword), [debouncedPassword])
   const securityLevel = useMemo(() => getSecurityLevelByTime(crackTime), [crackTime])
   const securityLevelByScore = useMemo(() => getSecurityLevelByScore(score), [score])
   const suggestions = useMemo(() => getPasswordFeedback(debouncedPassword), [debouncedPassword])
 
   return (
-    <Card className="max-w-md mx-auto" variant="outline">
+    <Card className="max-w-md mx-auto w-full" variant="outline">
       <CardHeader>
         <h2 className="text-xl font-bold">Password Validator</h2>
       </CardHeader>

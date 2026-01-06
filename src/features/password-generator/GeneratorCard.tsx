@@ -1,14 +1,17 @@
-import { Card, CardHeader, CardContent } from '@components/ui'
+import { Activity } from 'react'
 import { useGenerator } from './hooks/useGenerator'
-import { PasswordDisplay } from '../../components/password/PasswordDisplay'
-import { PasswordSuggestions } from '../../components/password/PasswordSuggestions'
-import { LengthControl } from '../../components/password/LengthControl'
-import { StrengthMeter } from '../../components/password/StrengthMeter'
-import { CrackTime } from '../../components/password/CrackTime'
-import { OptionsSection } from '../../components/password/OptionsSection'
-import { AdvancedOptions } from '../../components/password/AdvancedOptions'
-import { VisibilitySelector } from '../../components/password/VisibilitySelector'
-import { HistoryLog } from '../../components/password/HistoryLog'
+import { Card, CardHeader, CardContent } from '@components/ui'
+import {
+  AdvancedOptions,
+  CrackTime,
+  HistoryLog,
+  LengthControl,
+  OptionsSection,
+  PasswordDisplay,
+  PasswordSuggestions,
+  StrengthMeter,
+  VisibilitySelector
+} from '@components/password'
 import { MIN_LENGTH, MAX_LENGTH } from './types'
 
 export default function GeneratorCard() {
@@ -33,7 +36,7 @@ export default function GeneratorCard() {
   } = useGenerator()
 
   return (
-    <Card className="max-w-md mx-auto" variant="outline">
+    <Card className="max-w-md mx-auto w-full" variant="outline">
       <CardHeader>
         <h2 className="text-xl font-bold">Generator</h2>
       </CardHeader>
@@ -43,17 +46,17 @@ export default function GeneratorCard() {
 
         <LengthControl length={length} minLength={MIN_LENGTH} maxLength={MAX_LENGTH} onChange={handleLengthChange} />
 
-        <div className="space-y-2">
-          {displaySettings.strength && <StrengthMeter score={score} level={securityLevelByScore} />}
-          {displaySettings.strength && (
-            <PasswordSuggestions
-              password={password}
-              suggestions={suggestions}
-              defaultMessage="Select some options to see suggestions."
-            />
-          )}
-          {displaySettings.crackTime && <CrackTime time={crackTime} level={securityLevel} />}
-        </div>
+        <Activity mode={displaySettings.strength ? 'visible' : 'hidden'}>
+          <StrengthMeter score={score} level={securityLevelByScore} />
+          <PasswordSuggestions
+            password={password}
+            suggestions={suggestions}
+            defaultMessage="Select some options to see suggestions."
+          />
+        </Activity>
+        <Activity mode={displaySettings.crackTime ? 'visible' : 'hidden'}>
+          <CrackTime time={crackTime} level={securityLevel} />
+        </Activity>
 
         <OptionsSection
           options={options}

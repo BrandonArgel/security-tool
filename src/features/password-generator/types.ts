@@ -19,6 +19,16 @@ export const DEFAULT_SETTINGS = {
   crackTime: true
 }
 
+export enum SettingType {
+  Strength = 'strength',
+  CrackTime = 'crackTime'
+}
+
+export type DisplaySettings = {
+  strength: boolean
+  crackTime: boolean
+}
+
 export interface GeneratorOptions {
   upper: boolean
   lower: boolean
@@ -29,11 +39,6 @@ export interface GeneratorOptions {
   avoidSequences: boolean
   minNumbers: number
   minSpecial: number
-}
-
-export interface DisplaySettings {
-  strength: boolean
-  crackTime: boolean
 }
 
 export const OPTION_KEYS = {

@@ -22,10 +22,12 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@actions/*": ["./src/actions/*"],
       "@adapters/*": ["./src/adapters/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@features/*": ["./src/features/*"],
+      "@generated/prisma/*": ["./src/generated/prisma/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@lib/*": ["./src/lib/*"],
       "@utils/*": ["./src/utils/*"]

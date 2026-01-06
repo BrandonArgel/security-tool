@@ -2,18 +2,22 @@
 import { toast } from 'sonner'
 import { Copy, Check } from 'lucide-react'
 import { Button, Card, Tooltip } from '@/components/ui'
-import { useClipboard } from '@/hooks'
+import { useCopyToClipboard } from '@/hooks'
 
 interface HistoryItemProps {
   pw: string
 }
 
 export const HistoryItem = ({ pw }: HistoryItemProps) => {
-  const { copied, copy } = useClipboard()
+  const [copied, copy, error] = useCopyToClipboard()
 
-  const handleCopy = (text: string) => {
-    copy(text)
-    toast.success('Copiado al portapapeles')
+  const handleCopy = async (text: string) => {
+    const result = await copy(text)
+    if (result) {
+      toast.success('Copied to clipboard')
+    } else if (error) {
+      toast.error(`Error: ${error.message}`)
+    }
   }
 
   return (

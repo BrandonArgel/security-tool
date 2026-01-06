@@ -20,19 +20,20 @@ export const Checkbox = ({ label, checked, onChange, disabled, ...props }: Check
           disabled={disabled}
           {...props}
         />
+
         <div
           className={`
             w-5 h-5 border-2 rounded transition-all duration-200 flex items-center justify-center
-            ${
-              checked ? 'bg-primary border-primary' : 'bg-transparent border-control-border group-hover:border-gray-400'
-            }
+            ${checked ? 'bg-primary border-primary' : 'bg-transparent border-gray-400 group-hover:border-gray-200'}
+            peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-black
+            ${disabled ? 'opacity-50' : ''}
           `}
         >
           <svg
             className={`
               w-3.5 h-3.5 text-white fill-none stroke-current
-              transition-all duration-200 transform animate-check-pop-in
-              ${checked ? 'animate-check-in' : 'animate-check-out hidden'}
+              transition-all duration-200 transform
+              ${checked ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}
             `}
             viewBox="0 0 24 24"
             strokeWidth="4"

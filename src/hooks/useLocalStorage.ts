@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useState } from 'react'
 
 export function useLocalStorage<T>(key: string, initialValue: T) {

@@ -5,7 +5,7 @@ import { cn } from '@/lib'
 import { Loader } from './Loader'
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg font-medium transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none relative',
+  'inline-flex items-center justify-center rounded-lg font-medium transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none relative cursor-pointer',
   {
     variants: {
       variant: {

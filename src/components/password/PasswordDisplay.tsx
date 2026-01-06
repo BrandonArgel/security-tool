@@ -3,7 +3,7 @@
 import { toast } from 'sonner'
 import { Copy, Check, RefreshCcwDot } from 'lucide-react'
 import { Button, Card, Tooltip } from '@/components/ui'
-import { useClipboard } from '@/hooks'
+import { useCopyToClipboard } from '@/hooks'
 import { cn } from '@/lib'
 
 interface PasswordDisplayProps {
@@ -12,19 +12,23 @@ interface PasswordDisplayProps {
 }
 
 export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps) => {
-  const { copied, copy } = useClipboard()
+  const [copied, copy, error] = useCopyToClipboard()
 
-  const handleCopy = (text: string) => {
+  const handleCopy = async (text: string) => {
     if (!text) return
-    copy(text)
-    toast.success('Password copied to clipboard')
+    const result = await copy(text)
+    if (result) {
+      toast.success('Password copied to clipboard')
+    } else if (error) {
+      toast.error(`Error: ${error.message}`)
+    }
   }
 
   return (
     <Card
       variant="secondary"
       padding="sm"
-      className="mb-6 flex justify-between items-center gap-4 group min-h-16"
+      className="mb-6 flex justify-between items-center gap-4 "
       disabled={!password}
     >
       <span

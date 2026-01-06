@@ -8,10 +8,8 @@ const GeneratorCard = dynamic(() => import('@/features/password-generator/Genera
 
 export default function PasswordGeneratorPage() {
   return (
-    <main className="flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <GeneratorCard />
-      </div>
-    </main>
+    <div className="flex flex-col items-center justify-center p-4">
+      <GeneratorCard />
+    </div>
   )
 }
