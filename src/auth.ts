@@ -7,7 +7,14 @@ import type { Provider } from 'next-auth/providers'
 
 export type AuthProviderId = 'google' | 'github'
 
-const providers: Provider[] = [GitHub, Google]
+const providers: Provider[] = [
+  GitHub({
+    allowDangerousEmailAccountLinking: true
+  }),
+  Google({
+    allowDangerousEmailAccountLinking: true
+  })
+]
 
 export const providerMap = providers
   .map((provider) => {
