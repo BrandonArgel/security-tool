@@ -14,8 +14,8 @@ export const UserMenu = ({ user }: UserMenuProps) => {
   if (!user) return null
 
   return (
-    <Dropdown>
-      <DropdownTrigger className="ml-2 p-0 rounded-full w-10 h-10 overflow-hidden ring-offset-2 focus-visible:ring-2 focus-visible:ring-primary">
+    <Dropdown className="ml-2 w-10 h-10">
+      <DropdownTrigger className="p-0 rounded-full overflow-hidden ring-offset-2 focus-visible:ring-2 focus-visible:ring-primary">
         {user.image ? (
           <Image
             src={user.image}

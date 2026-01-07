@@ -14,7 +14,7 @@ import {
 } from '@components/password'
 import { MIN_LENGTH, MAX_LENGTH } from './types'
 
-export default function GeneratorCard() {
+export const GeneratorCard = () => {
   const {
     password,
     history,

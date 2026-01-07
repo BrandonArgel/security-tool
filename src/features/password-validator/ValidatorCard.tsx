@@ -7,11 +7,10 @@ import {
   getTimeToCrack,
   getPasswordFeedback
 } from '@features/password-generator/utils/metrics'
-import { PasswordSuggestions, StrengthMeter } from '@components/password'
-import { CrackTime } from '@components/password'
+import { CrackTime, PasswordSuggestions, StrengthMeter } from '@components/password'
 import { useDebounce } from '@/hooks'
 
-export default function ValidatorCard() {
+export const ValidatorCard = () => {
   const [password, setPassword] = useState('')
   const debouncedPassword = useDebounce(password, 500)
   const score = useMemo(() => getStrengthScore(debouncedPassword), [debouncedPassword])

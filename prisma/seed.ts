@@ -13,20 +13,7 @@ const prisma = new PrismaClient({
   adapter
 })
 
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: 'Brandon Argel',
-    email: 'brandargel@gmail.com'
-  },
-  {
-    name: 'Alice',
-    email: 'alice@gmail.com'
-  },
-  {
-    name: 'Bob',
-    email: 'bob@gmail.com'
-  }
-]
+const userData: Prisma.UserCreateInput[] = []
 
 export async function main() {
   for (const user of userData) {

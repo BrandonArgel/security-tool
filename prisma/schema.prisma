@@ -22,6 +22,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  savedLogins   SavedLogin[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -61,4 +62,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model SavedLogin {
+  id        String   @id @default(cuid())
+  siteName  String?
+  url       String
+  username  String
+  password  String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
