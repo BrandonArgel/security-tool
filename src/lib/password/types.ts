@@ -19,10 +19,7 @@ export const DEFAULT_SETTINGS = {
   crackTime: true
 }
 
-export enum SettingType {
-  Strength = 'strength',
-  CrackTime = 'crackTime'
-}
+export type SettingType = 'strength' | 'crackTime'
 
 export type DisplaySettings = {
   strength: boolean

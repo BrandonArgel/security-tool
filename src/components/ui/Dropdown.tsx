@@ -20,9 +20,12 @@ interface DropdownProps {
   className?: string
 }
 
+import { Slot } from '@radix-ui/react-slot'
+
 interface DropdownTriggerProps {
   children: ReactNode
   className?: string
+  asChild?: boolean
 }
 
 interface DropdownContentProps {
@@ -91,18 +94,18 @@ export const Dropdown = ({ children, className = '' }: DropdownProps) => {
   )
 }
 
-export const DropdownTrigger = ({ children, className = '' }: DropdownTriggerProps) => {
+export const DropdownTrigger = ({ children, className = '', asChild = false }: DropdownTriggerProps) => {
   const { toggle, triggerRef } = useDropdownContext()
+  const Comp = asChild ? Slot : Button
 
   return (
-    <Button
-      variant="ghost"
+    <Comp
       ref={triggerRef}
       onClick={toggle}
-      className={cn('cursor-pointer hover:bg-transparent', className)}
+      className={cn('cursor-pointer hover:bg-transparent', className, !asChild && 'bg-transparent text-current')}
     >
       {children}
-    </Button>
+    </Comp>
   )
 }
 

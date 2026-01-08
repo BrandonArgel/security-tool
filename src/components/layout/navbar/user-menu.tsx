@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { User, LogOut, Settings } from 'lucide-react'
 import { signOut } from 'next-auth/react'
@@ -15,7 +16,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
 
   return (
     <Dropdown className="ml-2 w-10 h-10">
-      <DropdownTrigger className="p-0 rounded-full overflow-hidden ring-offset-2 focus-visible:ring-2 focus-visible:ring-primary">
+      <DropdownTrigger className="p-0 rounded-full overflow-hidden ring-offset-2 ring-offset-primary focus-visible:ring-2 focus-visible:ring-primary">
         {user.image ? (
           <Image
             src={user.image}
@@ -40,11 +41,15 @@ export const UserMenu = ({ user }: UserMenuProps) => {
         </div>
 
         <DropdownSection>
-          <DropdownItem icon={<User size={16} />}>Profile</DropdownItem>
+          <DropdownItem icon={<User size={16} />}>
+            <Link href="/profile">Profile</Link>
+          </DropdownItem>
         </DropdownSection>
 
         <DropdownSection>
-          <DropdownItem icon={<Settings size={16} />}>Settings</DropdownItem>
+          <DropdownItem icon={<Settings size={16} />}>
+            <Link href="/settings">Settings</Link>
+          </DropdownItem>
         </DropdownSection>
 
         <DropdownSection borderTop>

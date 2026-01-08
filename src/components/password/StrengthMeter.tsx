@@ -1,5 +1,5 @@
 import { cn } from '@/lib'
-import { SecurityLevel } from '@features/password-generator/utils/metrics'
+import { SecurityLevel } from '@/lib/password/metrics'
 
 interface StrengthMeterProps {
   level: SecurityLevel

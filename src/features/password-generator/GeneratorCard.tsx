@@ -12,7 +12,7 @@ import {
   StrengthMeter,
   VisibilitySelector
 } from '@components/password'
-import { MIN_LENGTH, MAX_LENGTH } from './types'
+import { MIN_LENGTH, MAX_LENGTH } from '@/lib/password/types'
 
 export const GeneratorCard = () => {
   const {

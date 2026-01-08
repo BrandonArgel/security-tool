@@ -1,54 +1,28 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@layer base {
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
-
-  /* Hide password reveal and clear buttons in Edge */
-  input::-ms-reveal,
-  input::-ms-clear {
-    display: none;
-  }
-
-  /* Hide password reveal button in WebKit browsers */
-  input::-webkit-password-reveal {
-    display: none;
-  }
-
-  /* Hide autofill buttons in WebKit browsers */
-  input::-webkit-contacts-auto-fill-button,
-  input::-webkit-credentials-auto-fill-button {
-    visibility: hidden;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-  }
-}
-
 @theme {
   /* --- Semantic colors --- */
   --color-background: #0f172a;
-  --color-surface: #121826;
-  --color-surface-hover: #1a2234;
+  --color-foreground: #f8fafc;
+
+  --color-surface: #1e293b;
+  --color-surface-hover: #334155;
+
   --color-primary: #3b82f6;
   --color-primary-hover: #2563eb;
+  --color-primary-foreground: #ffffff;
+
   --color-success: #16a34a;
   --color-success-hover: #15803d;
-  --color-border: #374151;
-  --color-text-muted: #9ca3af;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+
+  --color-border: #334155;
+  --color-border-subtle: #1e293b;
+  --color-border-strong: #475569;
+
+  --color-text-muted: #94a3b8;
 
   /* Security levels */
   --color-security-low: #ef4444;
@@ -57,16 +31,17 @@
   --color-security-safe: #22c55e;
 
   /* Control components */
-  --color-border-subtle: #1f2937;
-  --color-border-strong: #374151;
   --color-control-checked: var(--color-primary);
 
   /* --- Fonts --- */
   --font-password: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* --- Animations --- */
-  /* Slide-in animation for cards */
   --animate-slide-in: slide-in 0.4s ease-out both;
+  --animate-slide-out: slide-out 0.3s ease-in forwards;
+  --animate-copy-pop: copy-pop 0.2s ease-out;
+  --animate-check-in: check-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-check-out: check-out 0.2s ease-in forwards;
 
   @keyframes slide-in {
     0% {
@@ -79,9 +54,6 @@
     }
   }
 
-  /* Slide-out animation for cards */
-  --animate-slide-out: slide-out 0.3s ease-in forwards;
-
   @keyframes slide-out {
     0% {
       opacity: 1;
@@ -92,9 +64,6 @@
       transform: translateY(10px);
     }
   }
-
-  /* Pop animation for copy button */
-  --animate-copy-pop: copy-pop 0.2s ease-out;
 
   @keyframes copy-pop {
     0% {
@@ -107,10 +76,6 @@
       transform: scale(1.025);
     }
   }
-
-  /* Checkmark draw animation */
-  --animate-check-in: check-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  --animate-check-out: check-out 0.2s ease-in forwards;
 
   @keyframes check-in {
     0% {
@@ -135,36 +100,35 @@
   }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base styles */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Input resets */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  input::-ms-reveal,
+  input::-ms-clear,
+  input::-webkit-password-reveal {
+    display: none;
+  }
 }
 
 .no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-}
-
-input[type='range'] {
-  cursor: pointer;
-}
-
-input[type='range']:active {
-  cursor: grabbing;
 }

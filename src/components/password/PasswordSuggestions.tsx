@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle2, AlertCircle } from 'lucide-react'
-import { PasswordSuggestion } from '@features/password-generator/types'
+import { PasswordSuggestion } from '@/lib/password/types'
 import { Tooltip } from '@components/ui'
 
 interface PasswordSuggestionsProps {

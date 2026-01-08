@@ -1,6 +1,6 @@
 import { Info } from 'lucide-react'
 import { Card, Checkbox, Tooltip } from '@components/ui'
-import { GeneratorOptions, OnOptionChange } from '../../features/password-generator/types'
+import { GeneratorOptions, OnOptionChange } from '@/lib/password/types'
 
 interface Props {
   options: GeneratorOptions

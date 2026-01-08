@@ -8,7 +8,7 @@ export async function revealPassword(loginId: string) {
   const session = await auth()
 
   if (!session?.user?.id) {
-    return { error: 'No autorizado' }
+    return { error: 'Not authorized' }
   }
 
   const login = await prisma.savedLogin.findUnique({
@@ -19,13 +19,13 @@ export async function revealPassword(loginId: string) {
   })
 
   if (!login) {
-    return { error: 'Credencial no encontrada' }
+    return { error: 'Credential not found' }
   }
 
   try {
     const decryptedPassword = decrypt(login.password)
     return { password: decryptedPassword }
   } catch (error) {
-    return { error: 'Error al desencriptar' }
+    return { error: `Error decrypting password: ${error instanceof Error ? error.message : String(error)}` }
   }
 }

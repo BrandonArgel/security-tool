@@ -5,18 +5,16 @@ import {
   getSecurityLevelByScore,
   getStrengthScore,
   getTimeToCrack,
-  getPasswordFeedback
-} from '../utils/metrics'
-import { generatePassword } from '../utils/generator'
-import {
+  getPasswordFeedback,
+  generatePassword,
   GeneratorOptions,
   DEFAULT_OPTIONS,
   DEFAULT_SETTINGS,
   MIN_LENGTH,
   OnOptionChange,
   SettingType,
-  type DisplaySettings
-} from '../types'
+  DisplaySettings
+} from '@/lib/password'
 
 export const useGenerator = () => {
   // --- Persistent States ---

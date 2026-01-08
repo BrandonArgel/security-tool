@@ -6,7 +6,7 @@ import {
   getStrengthScore,
   getTimeToCrack,
   getPasswordFeedback
-} from '@features/password-generator/utils/metrics'
+} from '@/lib/password/metrics'
 import { CrackTime, PasswordSuggestions, StrengthMeter } from '@components/password'
 import { useDebounce } from '@/hooks'
 

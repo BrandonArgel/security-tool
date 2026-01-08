@@ -1,8 +1,7 @@
 import prisma from '@/lib/prisma'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import { CreateLoginFormCard } from '@/features/create-login-form/CreateLoginFormCard'
-import { LoginList } from '@/features/login-list/LoginList'
+import { VaultManager } from '@/features/vault/VaultManager'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,41 +20,23 @@ export default async function VaultPage() {
       id: true,
       siteName: true,
       username: true,
-      url: true
-      // password: false <-- No la necesitamos todavía
+      url: true,
+      createdAt: true,
+      isFavorite: true
     },
     orderBy: {
-      createdAt: 'desc'
+      siteName: 'asc'
     }
   })
 
   return (
-    <div className="container mx-auto p-6 space-y-10">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <CreateLoginFormCard />
-        </div>
-
-        <div>
-          <LoginList logins={logins} />
-        </div>
+    <div className="container mx-auto py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight mb-2">My Vault</h1>
+        <p className="text-text-muted">Manage your secured credentials.</p>
       </div>
+
+      <VaultManager logins={logins} />
     </div>
   )
 }
-
-// const users = await prisma.user.findMany()
-//
-// return (
-//   <div className="flex flex-col items-center justify-center p-4">
-//     <h1 className="text-2xl font-bold mb-4">Secret Vault</h1>
-//     <CreateLoginFormCard />
-//     {/* <ol className="list-decimal list-inside text-lg">
-//       {users.map((user) => (
-//         <li key={user.id} className="mb-2 text-primary">
-//           {user.name || user.email}
-//         </li>
-//       ))}
-//     </ol> */}
-//   </div>
-// )

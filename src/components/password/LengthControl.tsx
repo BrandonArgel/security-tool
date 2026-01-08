@@ -6,7 +6,7 @@ import { Input } from '@/components/ui'
 import { Info } from 'lucide-react'
 import { Tooltip } from '@components/ui'
 import { cn } from '@/lib/cn'
-import { MIN_LENGTH } from '@/features/password-generator/types'
+import { MIN_LENGTH } from '@/lib/password/types'
 
 interface LengthControlProps {
   length: number

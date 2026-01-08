@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { Activity, useId } from 'react'
 import { Button, Card, Checkbox } from '@components/ui'
-import { SettingType } from '@features/password-generator/types'
+import { type SettingType } from '@/lib/password/types'
 import { useActivityMode } from '@/hooks'
 
 interface VisibilitySelectorProps {
@@ -36,16 +36,8 @@ export const VisibilitySelector = ({ showStrength, showCrackTime, onToggle }: Vi
           }`}
         >
           <Card className="p-4 space-y-4 border-border bg-surface/50">
-            <Checkbox
-              label="Show Strength Meter"
-              checked={showStrength}
-              onChange={() => onToggle(SettingType.Strength)}
-            />
-            <Checkbox
-              label="Show Time to Crack"
-              checked={showCrackTime}
-              onChange={() => onToggle(SettingType.CrackTime)}
-            />
+            <Checkbox label="Show Strength Meter" checked={showStrength} onChange={() => onToggle('strength')} />
+            <Checkbox label="Show Time to Crack" checked={showCrackTime} onChange={() => onToggle('crackTime')} />
           </Card>
         </div>
       </Activity>
