@@ -5,4 +5,5 @@ export { Dropdown, DropdownContent, DropdownItem, DropdownSection, DropdownTrigg
 export { Input } from './Input'
 export { Loader } from './Loader'
 export { Tooltip } from './Tooltip'
+export { Toggle } from './Toggle'
 export { Modal } from './Modal'

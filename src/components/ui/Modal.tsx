@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentPropsWithoutRef, ElementType, ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -20,7 +20,7 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    const timeout = setTimeout(() => setMounted(true), 0)
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -34,6 +34,7 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
     return () => {
       document.body.style.overflow = 'unset'
       window.removeEventListener('keydown', handleEscape)
+      clearTimeout(timeout)
     }
   }, [isOpen, onClose])
 
@@ -49,7 +50,7 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/10 backdrop-blur-xs"
           />
 
           {/* Dialog */}
@@ -62,7 +63,7 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
           >
             <div
               className={cn(
-                'relative w-full overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl',
+                'relative w-full overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl max-h-[90vh] overflow-y-auto',
                 className
               )}
             >

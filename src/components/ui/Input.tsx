@@ -13,7 +13,17 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: Ref<HTMLInputElement>
 }
 
-export const Input = ({ label, error, className, type = 'text', startIcon, endIcon, ref, ...props }: InputProps) => {
+export const Input = ({
+  id,
+  label,
+  error,
+  className,
+  type = 'text',
+  startIcon,
+  endIcon,
+  ref,
+  ...props
+}: InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
   const internalRef = useRef<HTMLInputElement>(null)
 
@@ -39,12 +49,17 @@ export const Input = ({ label, error, className, type = 'text', startIcon, endIc
 
   return (
     <div className="flex flex-col gap-1.5 w-full">
-      {label && <label className="text-xs font-bold text-gray-500 uppercase tracking-wider px-1">{label}</label>}
+      {label && (
+        <label htmlFor={id} className="text-xs font-bold text-gray-500 uppercase tracking-wider px-1">
+          {label}
+        </label>
+      )}
 
       <div className="relative group">
         {StartIcon}
 
         <input
+          id={id}
           ref={handleRef}
           type={inputType}
           className={cn(

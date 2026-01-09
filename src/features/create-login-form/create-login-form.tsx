@@ -1,6 +1,6 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { savedLoginSchema, SavedLoginValues } from '@/lib/schemas'
@@ -8,8 +8,8 @@ import { createSavedLogin } from '@/actions/save-login'
 import { updateSavedLogin } from '@/actions/update-login'
 import { Button, Input, Tooltip } from '@/components/ui'
 import { toast } from 'sonner'
-import { Globe, Lock, User, Link as LinkIcon, RefreshCw } from 'lucide-react'
-import { generatePassword } from '@/lib/password'
+import { Globe, Lock, User, Link as LinkIcon, RefreshCcwDot } from 'lucide-react'
+import { useModal } from '@/components'
 
 interface SavedLoginFormProps {
   initialData?: SavedLoginValues & { id?: string }
@@ -17,6 +17,7 @@ interface SavedLoginFormProps {
 }
 
 export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) => {
+  const { newPassword, setNewPassword, openPasswordGeneratorModal } = useModal()
   const [isPending, startTransition] = useTransition()
   const isEditing = !!initialData?.id
 
@@ -50,28 +51,26 @@ export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) 
     })
   }
 
-  const handleGeneratePassword = () => {
-    const newPassword = generatePassword({
-      length: 16,
-      upper: true,
-      lower: true,
-      number: true,
-      special: true,
-      avoidAmbiguous: false,
-      avoidRepeated: true,
-      avoidSequences: true,
-      minNumbers: 1,
-      minSpecial: 1
-    })
-    form.setValue('password', newPassword, { shouldValidate: true, shouldDirty: true })
-    toast.success('Password generated')
+  const openGeneratorModal = () => {
+    openPasswordGeneratorModal()
   }
+
+  useEffect(() => {
+    console.log('Render')
+    if (newPassword) {
+      form.setValue('password', newPassword)
+      form.trigger('password')
+    } else {
+      setNewPassword('')
+    }
+  }, [newPassword, setNewPassword, form])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
       <div className="space-y-4">
         <div className="space-y-2">
           <Input
+            id="siteName"
             label="Site Name"
             {...form.register('siteName')}
             placeholder="e.g. Netflix Personal"
@@ -82,6 +81,7 @@ export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) 
 
         <div className="space-y-2">
           <Input
+            id="siteURL"
             label="URL"
             {...form.register('url')}
             placeholder="https://..."
@@ -93,6 +93,7 @@ export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) 
 
         <div className="space-y-2">
           <Input
+            id="username"
             label="Username / Email"
             {...form.register('username')}
             placeholder="user@example.com"
@@ -106,6 +107,7 @@ export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) 
           <div className="flex items-end gap-2">
             <div className="flex-1">
               <Input
+                id="password"
                 type="password"
                 label="Password"
                 {...form.register('password')}
@@ -120,11 +122,11 @@ export const SavedLoginForm = ({ initialData, onSuccess }: SavedLoginFormProps) 
                 type="button"
                 variant="outline"
                 size="icon"
-                onClick={handleGeneratePassword}
+                onClick={openGeneratorModal}
                 className="p-2.25"
                 disabled={isPending}
               >
-                <RefreshCw size={18} />
+                <RefreshCcwDot size={18} />
               </Button>
             </Tooltip>
           </div>

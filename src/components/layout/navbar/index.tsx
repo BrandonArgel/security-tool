@@ -86,7 +86,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-[88px] z-30 px-4 md:hidden"
+            className="fixed inset-x-0 top-22 z-30 px-4 md:hidden"
           >
             <Card variant="glass" className="overflow-hidden border-white/5 bg-surface/95 backdrop-blur-xl">
               <nav className="flex flex-col gap-2 p-2">

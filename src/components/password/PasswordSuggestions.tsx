@@ -18,7 +18,7 @@ export const PasswordSuggestions = ({ password, suggestions, defaultMessage }: P
         <div className="flex items-center gap-1">
           <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Recommendations</p>
           <Tooltip content="Don't use personal information such as names (including your pets' names), birth dates, or other easily guessable words.">
-            <AlertCircle size={12} className="text-current cursor-help hover:opacity-80" />
+            <AlertCircle size={12} className="text-text-muted cursor-help hover:opacity-80" />
           </Tooltip>
         </div>
         {isComplete && (

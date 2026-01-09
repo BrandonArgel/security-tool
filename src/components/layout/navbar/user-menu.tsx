@@ -41,15 +41,15 @@ export const UserMenu = ({ user }: UserMenuProps) => {
         </div>
 
         <DropdownSection>
-          <DropdownItem icon={<User size={16} />}>
-            <Link href="/profile">Profile</Link>
-          </DropdownItem>
+          <Link href="/profile">
+            <DropdownItem icon={<User size={16} />}>Profile</DropdownItem>
+          </Link>
         </DropdownSection>
 
         <DropdownSection>
-          <DropdownItem icon={<Settings size={16} />}>
-            <Link href="/settings">Settings</Link>
-          </DropdownItem>
+          <Link href="/settings">
+            <DropdownItem icon={<Settings size={16} />}>Settings</DropdownItem>
+          </Link>
         </DropdownSection>
 
         <DropdownSection borderTop>

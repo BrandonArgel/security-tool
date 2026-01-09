@@ -102,6 +102,10 @@
 
 /* Base styles */
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

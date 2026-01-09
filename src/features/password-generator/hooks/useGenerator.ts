@@ -1,35 +1,39 @@
 import { useMemo, useEffect, useRef, useCallback, useState } from 'react'
 import { useDebounce, useLocalStorage } from '@/hooks'
 import {
-  getSecurityLevelByTime,
-  getSecurityLevelByScore,
-  getStrengthScore,
-  getTimeToCrack,
-  getPasswordFeedback,
-  generatePassword,
-  GeneratorOptions,
   DEFAULT_OPTIONS,
   DEFAULT_SETTINGS,
   MIN_LENGTH,
+  DisplaySettings,
+  generatePassword,
+  GeneratorOptions,
+  getPasswordFeedback,
+  getSecurityLevelByScore,
+  getSecurityLevelByTime,
+  getStrengthScore,
+  getTimeToCrack,
   OnOptionChange,
-  SettingType,
-  DisplaySettings
+  SettingType
 } from '@/lib/password'
+import { StorageKeys } from '@/lib/storageKeys'
 
 export const useGenerator = () => {
   // --- Persistent States ---
   const [length, setLength] = useState<number>(() => {
-    const saved = localStorage.getItem('pw_length')
+    const saved = localStorage.getItem(StorageKeys.PW_LENGTH)
     return saved ? Number(saved) : 16
   })
   const [password, setPassword] = useState<string>('')
 
-  const [, setSavedLength] = useLocalStorage<number>('pw_length', 16)
-  const [history, setHistory] = useLocalStorage<string[]>('pw_history', [])
-  const [options, setOptions] = useLocalStorage<GeneratorOptions>('pw_generatorOptions', DEFAULT_OPTIONS)
-  const [displaySettings, setDisplaySettings] = useLocalStorage<DisplaySettings>('pw_displaySettings', DEFAULT_SETTINGS)
+  const [, setSavedLength] = useLocalStorage<number>(StorageKeys.PW_LENGTH, 16)
+  const [history, setHistory] = useLocalStorage<string[]>(StorageKeys.PW_HISTORY, [])
+  const [options, setOptions] = useLocalStorage<GeneratorOptions>(StorageKeys.PW_GENERATOR_OPTIONS, DEFAULT_OPTIONS)
+  const [displaySettings, setDisplaySettings] = useLocalStorage<DisplaySettings>(
+    StorageKeys.PW_DISPLAY_SETTINGS,
+    DEFAULT_SETTINGS
+  )
 
-  const debouncedLength = useDebounce(length, 500)
+  const debouncedLength = useDebounce(length, 300)
   const lastPassword = useRef<string>('')
 
   const regenerate = useCallback(() => {
