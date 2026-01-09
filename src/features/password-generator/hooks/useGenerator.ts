@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef, useCallback, useState } from 'react'
+import { useMemo, useEffect, useRef, useCallback, useState, useEffectEvent } from 'react'
 import { useDebounce, useLocalStorage } from '@/hooks'
 import {
   DEFAULT_OPTIONS,
@@ -36,6 +36,14 @@ export const useGenerator = () => {
   const debouncedLength = useDebounce(length, 300)
   const lastPassword = useRef<string>('')
 
+  const handleAutoGenerate = useEffectEvent(() => {
+    const absoluteMin = Math.max(MIN_LENGTH, options.minNumbers + options.minSpecial)
+
+    if (debouncedLength >= absoluteMin) {
+      setPassword(generatePassword({ length: debouncedLength, ...options }))
+    }
+  })
+
   const regenerate = useCallback(() => {
     const absoluteMin = Math.max(MIN_LENGTH, options.minNumbers + options.minSpecial)
     const validLength = Math.max(length, absoluteMin)
@@ -45,14 +53,7 @@ export const useGenerator = () => {
   useEffect(() => {
     setSavedLength(debouncedLength)
 
-    const absoluteMin = Math.max(MIN_LENGTH, options.minNumbers + options.minSpecial)
-    const timer = setTimeout(() => {
-      if (debouncedLength >= absoluteMin) {
-        setPassword(generatePassword({ length: debouncedLength, ...options }))
-      }
-    }, 0)
-
-    return () => clearTimeout(timer)
+    handleAutoGenerate()
   }, [debouncedLength, options, setSavedLength])
 
   // --- Synchronization of History ---

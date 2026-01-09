@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useEffectEvent, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -19,8 +19,12 @@ interface ModalProps {
 export const Modal = ({ isOpen, onClose, children, title, description, className }: ModalProps) => {
   const [mounted, setMounted] = useState(false)
 
+  const handleMounted = useEffectEvent(() => {
+    setMounted(true)
+  })
+
   useEffect(() => {
-    const timeout = setTimeout(() => setMounted(true), 0)
+    handleMounted()
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -34,7 +38,6 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
     return () => {
       document.body.style.overflow = 'unset'
       window.removeEventListener('keydown', handleEscape)
-      clearTimeout(timeout)
     }
   }, [isOpen, onClose])
 
