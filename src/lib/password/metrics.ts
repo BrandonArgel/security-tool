@@ -46,7 +46,7 @@ export const getStrengthScore = (password: string): number => {
   else if (entropy > 40) score = 2
 
   //Adjustments for Diversity and Patterns
-  const types = [/[A-Z]/, /[a-z]/, /[0-9]/, /[^A-Za-z0-9]/].filter((r) => r.test(password)).length
+  const types = [/[A-Z]/, /[a-z]/, /[0-9]/, /[^A-Za-z0-9]/].filter(r => r.test(password)).length
 
   // Bonus for using multiple character types
   if (types === 4 && length >= 12) score = Math.max(score, 4)
@@ -122,5 +122,5 @@ export const getPasswordFeedback = (password: string) => {
     { id: 'sequence', label: 'Avoid character sequences (e.g. abc, 123)', met: !checkHasSequence(password) }
   ]
 
-  return requirements.filter((req) => !req.met).map((req) => ({ id: req.id, message: req.label }))
+  return requirements.filter(req => !req.met).map(req => ({ id: req.id, message: req.label }))
 }

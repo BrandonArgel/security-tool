@@ -21,14 +21,14 @@ export const LengthControl = ({ length, minLength, maxLength, isControlDisabled,
   const hasError = isTouched && length < 5
 
   return (
-    <section className="flex flex-col gap-6 w-full">
-      <div className="flex justify-between items-end">
+    <section className="flex w-full flex-col gap-6">
+      <div className="flex items-end justify-between">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Length</span>
+            <span className="text-text-subtle text-sm font-bold tracking-widest uppercase">Length</span>
 
             <Tooltip content="Passwords with 16+ characters are significantly harder to crack.">
-              <Info size={16} className="text-primary cursor-help hover:text-primary/80" />
+              <Info size={16} className="text-primary hover:text-primary/80 cursor-help" />
             </Tooltip>
           </div>
         </div>
@@ -43,13 +43,13 @@ export const LengthControl = ({ length, minLength, maxLength, isControlDisabled,
               min={0}
               max={maxLength}
               value={length === 0 ? '' : length}
-              onChange={(e) => {
+              onChange={e => {
                 const val = e.target.value === '' ? 0 : parseInt(e.target.value)
                 onChange(val)
               }}
               onBlur={() => setIsTouched(true)}
               error={hasError ? `Minimum length is ${MIN_LENGTH}` : undefined}
-              className="text-center font-mono text-primary text-lg py-1"
+              className="text-primary py-1 text-center font-mono text-lg"
               disabled={isControlDisabled}
             />
           </motion.div>
@@ -63,18 +63,18 @@ export const LengthControl = ({ length, minLength, maxLength, isControlDisabled,
             min={minLength}
             max={maxLength}
             value={length}
-            onChange={(e) => onChange(parseInt(e.target.value) || 0)}
+            onChange={e => onChange(parseInt(e.target.value) || 0)}
             className={cn(
-              'w-full h-2 bg-border-subtle rounded-lg appearance-none transition-all',
+              'bg-border-strong/25 h-2 w-full appearance-none rounded-lg transition-all',
               'accent-primary enabled:cursor-pointer enabled:active:cursor-grabbing',
               'disabled:cursor-not-allowed disabled:opacity-50'
             )}
             disabled={isControlDisabled}
           />
         </div>
-        <div className="flex justify-between px-0.5 select-none pointer-events-none">
-          <span className="text-[10px] font-bold text-text-muted font-mono">{minLength}</span>
-          <span className="text-[10px] font-bold text-text-muted font-mono">{maxLength}</span>
+        <div className="pointer-events-none flex justify-between px-0.5 select-none">
+          <span className="text-text-muted font-mono text-sm font-bold">{minLength}</span>
+          <span className="text-text-muted font-mono text-sm font-bold">{maxLength}</span>
         </div>
       </div>
     </section>

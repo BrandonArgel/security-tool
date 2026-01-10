@@ -15,10 +15,13 @@ export default function GlobalError({ reset }: GlobalErrorProps) {
 
   return (
     <html>
-      <body className="bg-[#0a0f1a] text-white flex items-center justify-center min-h-screen">
+      <body className="flex min-h-screen items-center justify-center bg-background text-foreground">
         <div className="text-center">
-          <h1 className="text-4xl font-black mb-4">CRITICAL_ERROR</h1>
-          <button onClick={handleReset} className="text-primary underline font-mono hover:text-white transition-colors">
+          <h1 className="mb-4 text-4xl font-black">CRITICAL_ERROR</h1>
+          <button
+            onClick={handleReset}
+            className="text-primary font-mono underline transition-colors hover:text-foreground"
+          >
             REBOOT_SYSTEM
           </button>
         </div>

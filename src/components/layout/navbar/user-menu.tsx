@@ -15,28 +15,28 @@ export const UserMenu = ({ user }: UserMenuProps) => {
   if (!user) return null
 
   return (
-    <Dropdown className="ml-2 w-10 h-10">
-      <DropdownTrigger className="p-0 rounded-full overflow-hidden ring-offset-2 ring-offset-primary focus-visible:ring-2 focus-visible:ring-primary">
+    <Dropdown className="ml-2 h-10 w-10">
+      <DropdownTrigger className="ring-offset-primary focus-visible:ring-primary overflow-hidden rounded-full p-0 ring-offset-2 focus-visible:ring-2">
         {user.image ? (
           <Image
             src={user.image}
             alt={`${user.name}'s profile`}
             width={40}
             height={40}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-slate-700 ml-2 border border-white/20 flex items-center justify-center">
-            <span className="text-xs font-bold">{user.name?.charAt(0) || 'U'}</span>
+          <div className="ml-2 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-700">
+            <span className="text-sm font-bold">{user.name?.charAt(0) || 'U'}</span>
           </div>
         )}
       </DropdownTrigger>
 
       <DropdownContent align="right" className="w-72">
-        <div className="flex items-center gap-3 p-4 border-b border-gray-700">
+        <div className="flex items-center gap-3 border-b border-border p-4">
           <div className="flex flex-col">
-            <span className="text-xs text-gray-400">Logged in as</span>
-            <span className="text-sm font-semibold text-white truncate">{user.name || 'User'}</span>
+            <span className="text-sm text-text-subtle">Logged in as</span>
+            <span className="truncate text-sm font-semibold text-foreground">{user.name || 'User'}</span>
           </div>
         </div>
 

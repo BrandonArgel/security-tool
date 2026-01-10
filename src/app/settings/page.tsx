@@ -1,7 +1,8 @@
-import { Card, CardContent, CardHeader, Button } from '@/components/ui'
+import { Card, CardContent, Button } from '@/components/ui'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import { Settings as SettingsIcon, Moon, Bell, Shield, Key } from 'lucide-react'
+import { Bell, Shield, Key } from 'lucide-react'
+import { ThemeColorSelector } from '@/components/ui/ThemeColorSelector'
 
 export default async function SettingsPage() {
   const session = await auth()
@@ -11,51 +12,35 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-8">Settings</h1>
+    <div className="container mx-auto max-w-2xl py-8">
+      <h1 className="text-foreground mb-8 text-3xl font-bold">Settings</h1>
 
       <div className="space-y-6">
         <section>
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
             <ApperanceIcon className="h-5 w-5 opacity-70" />
             Appearance
           </h2>
           <Card>
-            <CardContent className="py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-full bg-primary/10 text-primary">
-                    <Moon size={20} />
-                  </div>
-                  <div>
-                    <p className="font-medium">Dark Mode</p>
-                    <p className="text-sm text-text-muted">Adjust the appearance of the app</p>
-                  </div>
-                </div>
-                {/* Toggle placeholder */}
-                <div className="h-6 w-11 rounded-full bg-primary/20 relative cursor-pointer">
-                  <div className="absolute right-1 top-1 h-4 w-4 rounded-full bg-primary shadow-sm" />
-                </div>
-              </div>
-            </CardContent>
+            <ThemeColorSelector />
           </Card>
         </section>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+        <section className="pointer-events-none opacity-50">
+          <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
             <SecurityIcon className="h-5 w-5 opacity-70" />
-            Security
+            Security (soon)
           </h2>
           <Card>
             <CardContent className="space-y-4 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-full bg-emerald-500/10 text-emerald-500">
+                  <div className="rounded-full bg-emerald-500/10 p-2 text-emerald-500">
                     <Shield size={20} />
                   </div>
                   <div>
-                    <p className="font-medium">Two-Factor Authentication</p>
-                    <p className="text-sm text-text-muted">Add an extra layer of security</p>
+                    <p className="text-foreground font-medium">Two-Factor Authentication</p>
+                    <p className="text-text-muted text-sm">Add an extra layer of security</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
@@ -63,16 +48,16 @@ export default async function SettingsPage() {
                 </Button>
               </div>
 
-              <div className="h-px bg-border-subtle" />
+              <div className="bg-border-subtle h-px" />
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-full bg-amber-500/10 text-amber-500">
+                  <div className="rounded-full bg-amber-500/10 p-2 text-amber-500">
                     <Key size={20} />
                   </div>
                   <div>
-                    <p className="font-medium">Change Master Password</p>
-                    <p className="text-sm text-text-muted">Update your main vault password</p>
+                    <p className="text-foreground font-medium">Change Master Password</p>
+                    <p className="text-text-muted text-sm">Update your main vault password</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
@@ -83,25 +68,25 @@ export default async function SettingsPage() {
           </Card>
         </section>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+        <section className="pointer-events-none opacity-50">
+          <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
             <BellIcon className="h-5 w-5 opacity-70" />
-            Notifications
+            Notifications (soon)
           </h2>
           <Card>
             <CardContent className="py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-full bg-blue-500/10 text-blue-500">
+                  <div className="rounded-full bg-blue-500/10 p-2 text-blue-500">
                     <Bell size={20} />
                   </div>
                   <div>
-                    <p className="font-medium">Security Alerts</p>
-                    <p className="text-sm text-text-muted">Get notified about suspicious activity</p>
+                    <p className="text-foreground font-medium">Security Alerts</p>
+                    <p className="text-text-muted text-sm">Get notified about suspicious activity</p>
                   </div>
                 </div>
-                <div className="h-6 w-11 rounded-full bg-primary/20 relative cursor-pointer">
-                  <div className="absolute right-1 top-1 h-4 w-4 rounded-full bg-primary shadow-sm" />
+                <div className="bg-primary/20 relative h-6 w-11 cursor-pointer rounded-full">
+                  <div className="bg-primary absolute top-1 right-1 h-4 w-4 rounded-full shadow-sm" />
                 </div>
               </div>
             </CardContent>

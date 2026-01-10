@@ -21,15 +21,15 @@ export const HistoryItem = ({ pw }: HistoryItemProps) => {
   }
 
   return (
-    <Card variant="secondary" padding="sm" className="flex justify-between items-center border-white/5 bg-surface/30">
-      <span className="font-mono text-sm truncate pr-4 text-gray-300 select-all">{pw}</span>
+    <Card variant="secondary" padding="sm" className="bg-surface/30 flex items-center justify-between border-white/5">
+      <span className="text-text-subtle truncate pr-4 font-mono text-sm select-all">{pw}</span>
 
       <Tooltip content="Copy password">
         <Button variant="ghost" size="icon" onClick={() => handleCopy(pw)}>
           {copied ? (
-            <Check className="w-4 h-4 text-green-500 animate-check-in" />
+            <Check className="animate-check-in h-4 w-4 text-green-500" />
           ) : (
-            <Copy className="w-4 h-4 transition-transform group-hover:scale-110" />
+            <Copy className="h-4 w-4 transition-transform group-hover:scale-110" />
           )}
         </Button>
       </Tooltip>

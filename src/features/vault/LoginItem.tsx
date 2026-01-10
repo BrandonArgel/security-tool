@@ -9,7 +9,8 @@ import {
   DropdownContent,
   DropdownItem,
   DropdownTrigger,
-  DropdownSection
+  DropdownSection,
+  Input
 } from '@/components/ui'
 import { Copy, Eye, EyeOff, ExternalLink, Globe, Star, MoreVertical, Edit, User, Key, Trash2 } from 'lucide-react'
 import { revealPassword } from '@/actions/reveal-password'
@@ -122,26 +123,22 @@ export const LoginItem = ({
       layout
       className="group relative"
     >
-      <Card
-        variant="secondary"
-        padding="sm"
-        className="flex items-center justify-between gap-4 transition-all hover:bg-white/5"
-      >
-        <div className="flex items-center gap-4 min-w-0 flex-1">
-          {/* Favorite Icon (Quick Access) */}
+      <Card padding="sm" className="hover:bg-surface-hover flex items-center justify-between gap-4 transition-all">
+        <div className="flex min-w-0 flex-1 items-center gap-4">
+          {/* Favorite Icon */}
           <Button
             variant="ghost"
             onClick={handleFavorite}
             className={cn(
-              'p-1 rounded-full transition-colors hover:bg-yellow-500/10',
-              data.isFavorite ? 'text-yellow-500 hover:text-yellow-500/75' : 'text-gray-600 hover:text-yellow-500/50'
+              'rounded-full p-1 transition-colors hover:bg-yellow-500/10',
+              data.isFavorite ? 'text-yellow-500 hover:text-yellow-500/75' : 'text-text-muted hover:text-yellow-500/50'
             )}
             aria-label={data.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
             <Star className={cn('h-5 w-5', data.isFavorite && 'fill-current')} />
           </Button>
 
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
             {data.url ? (
               <Image
                 src={`https://www.google.com/s2/favicons?domain=${data.url}&sz=24`}
@@ -149,7 +146,7 @@ export const LoginItem = ({
                 width={24}
                 height={24}
                 className="h-6 w-6 object-contain opacity-80"
-                onError={(e) => {
+                onError={e => {
                   e.currentTarget.style.display = 'none'
                   e.currentTarget.nextElementSibling?.classList.remove('hidden')
                 }}
@@ -159,44 +156,29 @@ export const LoginItem = ({
           </div>
 
           <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-foreground truncate">{data.siteName || 'Unnamed Site'}</h3>
-            <p className="text-sm text-text-muted truncate">{data.username}</p>
+            <h3 className="text-foreground truncate font-semibold">{data.siteName || 'Unnamed Site'}</h3>
+            <p className="text-text-muted truncate text-sm">{data.username}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <div
-            className={cn(
-              'hidden md:flex font-mono text-sm bg-black/20 px-3 py-1.5 rounded items-center justify-center min-w-35 transition-all',
-              isVisible ? 'text-foreground' : 'text-text-muted select-none'
-            )}
-            onClick={handleToggle}
-            role="button"
-            tabIndex={0}
-            aria-label={isVisible ? 'Hide password' : 'Show password'}
-          >
-            {isDecrypting ? (
-              <span className="animate-pulse">Decrypting...</span>
-            ) : isVisible && password ? (
-              <span className="tracking-wide select-all cursor-text" onClick={(e) => e.stopPropagation()}>
-                {password}
-              </span>
-            ) : (
-              <span className="tracking-widest cursor-pointer">••••••••••••</span>
-            )}
-          </div>
+          <Input
+            value={isDecrypting ? 'Decrypting...' : isVisible && password ? password : '••••••••••••'}
+            readOnly
+            endIcon={
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleToggle}
+                className="text-text-muted hover:text-foreground"
+                aria-label={isVisible ? 'Hide password' : 'Show password'}
+              >
+                {isVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+              </Button>
+            }
+          />
 
           <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleToggle}
-              className="text-text-muted hover:text-foreground"
-              aria-label={isVisible ? 'Hide password' : 'Show password'}
-            >
-              {isVisible ? <EyeOff size={18} /> : <Eye size={18} />}
-            </Button>
-
             {/* Copy Dropdown */}
             <Dropdown>
               <DropdownTrigger asChild>

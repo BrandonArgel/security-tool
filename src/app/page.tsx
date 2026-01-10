@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 
 const GeneratorCard = dynamic(
-  () => import('@/features/password-generator/GeneratorCard').then((mod) => mod.GeneratorCard),
+  () => import('@/features/password-generator/GeneratorCard').then(mod => mod.GeneratorCard),
   {
     ssr: false
   }

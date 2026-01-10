@@ -28,11 +28,11 @@ export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps
     <Card
       variant="secondary"
       padding="sm"
-      className="mb-6 flex justify-between items-center gap-4 "
+      className="mb-6 flex items-center justify-between gap-4"
       disabled={!password}
     >
       <span
-        className={`font-password text-lg break-all select-all ${!password ? 'text-text-muted italic' : 'text-white font-medium'}`}
+        className={`font-password text-lg break-all select-all ${!password ? 'text-foreground/50 italic' : 'text-foreground font-medium'}`}
       >
         {password || 'Select options...'}
       </span>
@@ -40,7 +40,7 @@ export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps
       <div className="flex items-center gap-2">
         <Tooltip content="Regenerate password">
           <Button variant="ghost" size="icon" onClick={onRegenerate} disabled={!password}>
-            <RefreshCcwDot className="w-4 h-4 transition-transform group-hover:rotate-180 duration-250" />
+            <RefreshCcwDot className="h-4 w-4 transition-transform duration-250 group-hover:rotate-180" />
           </Button>
         </Tooltip>
 
@@ -53,9 +53,9 @@ export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps
             disabled={!password}
           >
             {copied ? (
-              <Check className="w-4 h-4 text-green-500 animate-check-in" />
+              <Check className="animate-check-in h-4 w-4 text-green-500" />
             ) : (
-              <Copy className="w-4 h-4 transition-transform group-hover:scale-110" />
+              <Copy className="h-4 w-4 transition-transform group-hover:scale-110" />
             )}
           </Button>
         </Tooltip>

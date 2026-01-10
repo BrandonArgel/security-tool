@@ -32,7 +32,7 @@ export default async function VaultPage() {
   return (
     <div className="container mx-auto py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">My Vault</h1>
+        <h1 className="mb-2 text-3xl font-bold tracking-tight">My Vault</h1>
         <p className="text-text-muted">Manage your secured credentials.</p>
       </div>
 

@@ -64,7 +64,7 @@ export const useGenerator = () => {
       const passwordToStore = lastPassword.current
 
       if (passwordToStore) {
-        setHistory((prev) => {
+        setHistory(prev => {
           if (prev[0] === passwordToStore) return prev
           return [passwordToStore, ...prev].slice(0, 5)
         })
@@ -79,7 +79,7 @@ export const useGenerator = () => {
   }
 
   const handleMinNumbersChange = (val: number) => {
-    setOptions((prev) => {
+    setOptions(prev => {
       const newOptions = { ...prev, minNumbers: val }
       const totalMins = val + prev.minSpecial
       if (totalMins > length) setLength(totalMins)
@@ -90,18 +90,18 @@ export const useGenerator = () => {
   const handleMinSpecialChange = (val: number) => {
     const totalMins = options.minNumbers + val
     if (totalMins > length) setLength(totalMins)
-    setOptions((prev) => ({ ...prev, minSpecial: val }))
+    setOptions(prev => ({ ...prev, minSpecial: val }))
   }
 
   const handleOptionChange: OnOptionChange = (key, value) => {
-    setOptions((prev) => ({
+    setOptions(prev => ({
       ...prev,
       [key]: value
     }))
   }
 
   const toggleDisplay = (key: SettingType) => {
-    setDisplaySettings((prev) => ({ ...prev, [key]: !prev[key] }))
+    setDisplaySettings(prev => ({ ...prev, [key]: !prev[key] }))
   }
 
   const score = useMemo(() => getStrengthScore(password), [password])

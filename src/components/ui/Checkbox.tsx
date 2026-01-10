@@ -7,8 +7,8 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox = ({ label, checked, onChange, disabled, ...props }: CheckboxProps) => {
   return (
     <label
-      className={`flex items-center w-fit gap-3 select-none transition-opacity ${
-        disabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer group'
+      className={`flex w-fit items-center gap-3 transition-opacity select-none ${
+        disabled ? 'cursor-not-allowed opacity-30' : 'group cursor-pointer'
       }`}
     >
       <div className="relative flex items-center justify-center">
@@ -22,19 +22,10 @@ export const Checkbox = ({ label, checked, onChange, disabled, ...props }: Check
         />
 
         <div
-          className={`
-            w-5 h-5 border-2 rounded transition-all duration-200 flex items-center justify-center
-            ${checked ? 'bg-primary border-primary' : 'bg-transparent border-gray-400 group-hover:border-gray-200'}
-            peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-black
-            ${disabled ? 'opacity-50' : ''}
-          `}
+          className={`flex size-5 items-center justify-center rounded border-2 transition-all duration-200 ${checked ? 'bg-primary border-primary' : 'border-gray-400 bg-transparent group-hover:border-gray-500'} peer-focus-visible:ring-primary peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-black ${disabled ? 'opacity-50' : ''} `}
         >
           <svg
-            className={`
-              w-3.5 h-3.5 text-white fill-none stroke-current
-              transition-all duration-200 transform
-              ${checked ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}
-            `}
+            className={`h-3.5 w-3.5 transform fill-none stroke-current text-white transition-all duration-200 ${checked ? 'scale-100 opacity-100' : 'scale-50 opacity-0'} `}
             viewBox="0 0 24 24"
             strokeWidth="4"
             strokeLinecap="round"
@@ -47,7 +38,7 @@ export const Checkbox = ({ label, checked, onChange, disabled, ...props }: Check
 
       <span
         className={`text-sm font-medium transition-colors ${
-          checked ? 'text-white' : 'text-text-muted group-hover:text-gray-200'
+          checked ? 'text-foreground' : 'text-text-muted group-hover:border-gray-500'
         }`}
       >
         {label}

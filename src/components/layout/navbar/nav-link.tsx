@@ -18,11 +18,13 @@ export const NavLink = ({ href, children, isActive }: NavLinkProps) => {
         {isActive && (
           <motion.div
             layoutId="active-nav"
-            className="absolute inset-0 bg-primary rounded-lg -z-10 shadow-lg shadow-primary/20"
+            className="bg-primary shadow-primary/20 absolute inset-0 -z-10 rounded-lg shadow-lg"
             transition={{ type: 'spring', stiffness: 380, damping: 30 }}
           />
         )}
-        <span className={cn('relative z-10 flex items-center gap-2', isActive && 'text-white')}>{children}</span>
+        <span className={cn('relative z-10 flex items-center gap-2', isActive && 'text-primary-foreground')}>
+          {children}
+        </span>
       </Link>
     </Button>
   )

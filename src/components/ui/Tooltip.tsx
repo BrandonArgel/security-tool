@@ -40,8 +40,8 @@ export const Tooltip = ({ children, content, className }: TooltipProps) => {
                   setOpen(false)
                 }}
                 className={cn(
-                  'z-100 max-w-70 rounded-lg bg-[#1e2536]/95 backdrop-blur-md px-3 py-2',
-                  'text-xs font-medium text-white shadow-2xl border border-white/10',
+                  'bg-surface/95 z-100 max-w-70 rounded-lg px-3 py-2 backdrop-blur-md',
+                  'text-foreground border border-border text-sm font-medium shadow-2xl',
                   className
                 )}
               >

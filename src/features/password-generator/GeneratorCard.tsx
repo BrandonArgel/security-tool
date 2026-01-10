@@ -36,15 +36,21 @@ export const GeneratorCard = () => {
   } = useGenerator()
 
   return (
-    <Card className="max-w-md mx-auto w-full" variant="outline">
+    <Card className="mx-auto w-full max-w-md" variant="outline">
       <CardHeader>
-        <h2 className="text-xl font-bold">Generator</h2>
+        <h2 className="text-foreground text-xl font-bold">Generator</h2>
       </CardHeader>
 
       <CardContent>
         <PasswordDisplay password={password} onRegenerate={regenerate} />
 
-        <LengthControl length={length} minLength={MIN_LENGTH} maxLength={MAX_LENGTH} onChange={handleLengthChange} />
+        <LengthControl
+          length={length}
+          minLength={MIN_LENGTH}
+          maxLength={MAX_LENGTH}
+          onChange={handleLengthChange}
+          isControlDisabled={!password}
+        />
 
         <Activity mode={displaySettings.strength ? 'visible' : 'hidden'}>
           <StrengthMeter score={score} level={securityLevelByScore} />

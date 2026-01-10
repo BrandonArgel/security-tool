@@ -124,8 +124,8 @@ export const DropdownContent = ({ children, className = '' }: DropdownContentPro
         transform: 'translateX(-100%)'
       }}
       className={cn(
-        'bg-surface border border-border rounded-lg shadow-xl z-50',
-        'overflow-hidden origin-top-right',
+        'bg-surface border-border z-50 rounded-lg border shadow-xl',
+        'origin-top-right overflow-hidden',
         'animate-in fade-in zoom-in-95 duration-100',
         className
       )}
@@ -149,16 +149,14 @@ export const DropdownItem = ({ children, icon, onClick, className = '', disabled
     <button
       onClick={handleClick}
       disabled={disabled}
-      className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors text-left 
-        ${disabled ? 'opacity-50 cursor-not-allowed text-gray-500' : 'text-gray-200 hover:bg-gray-700 hover:text-white'} 
-        ${className}`}
+      className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors ${disabled ? 'cursor-not-allowed text-text-muted opacity-50' : 'text-foreground hover:bg-surface-hover hover:text-foreground'} ${className}`}
     >
-      {icon && <span className={`${disabled ? 'text-gray-600' : 'text-gray-400'}`}>{icon}</span>}
+      {icon && <span className={`${disabled ? 'text-text-muted' : 'text-text-subtle'}`}>{icon}</span>}
       {children}
     </button>
   )
 }
 
 export const DropdownSection = ({ children, borderTop = false }: DropdownSectionProps) => (
-  <div className={`${borderTop ? 'border-t border-gray-700' : ''}`}>{children}</div>
+  <div className={`${borderTop ? 'border-t border-border' : ''}`}>{children}</div>
 )

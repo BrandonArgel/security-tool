@@ -20,7 +20,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   const setValue = useCallback(
     (value: T | ((_val: T) => T)) => {
       try {
-        setStoredValue((prev) => {
+        setStoredValue(prev => {
           const valueToStore = value instanceof Function ? value(prev) : value
 
           if (typeof window !== 'undefined') {

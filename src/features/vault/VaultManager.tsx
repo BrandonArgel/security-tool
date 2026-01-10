@@ -21,7 +21,7 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
   const [editingLogin, setEditingLogin] = useState<(SavedLoginValues & { id: string }) | null>(null)
 
   const handleEdit = (login: LoginItemProps) => {
-    revealPassword(login.id).then((res) => {
+    revealPassword(login.id).then(res => {
       if (res.password) {
         setEditingLogin({
           id: login.id,
@@ -69,7 +69,7 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
     if (search) {
       const lowerSearch = search.toLowerCase()
       result = result.filter(
-        (login) =>
+        login =>
           login.siteName?.toLowerCase().includes(lowerSearch) ||
           login.username.toLowerCase().includes(lowerSearch) ||
           login.url.toLowerCase().includes(lowerSearch)
@@ -78,7 +78,7 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
 
     // 2. Filter by Type (Favorites)
     if (filterType === 'favorites') {
-      result = result.filter((login) => login.isFavorite)
+      result = result.filter(login => login.isFavorite)
     }
 
     // 3. Sort
@@ -109,7 +109,7 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
               className="pl-9"
               placeholder="Search logins..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
             />
           </div>
 
@@ -117,7 +117,7 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
             {/* Sort Dropdown */}
             <Dropdown>
               <DropdownTrigger asChild>
-                <Button variant="outline" size="md" className="gap-2 min-w-25 justify-between">
+                <Button variant="outline" size="md" className="min-w-25 justify-between gap-2">
                   <span className="flex items-center gap-2">
                     {sortOrder === 'asc' && <SortAsc size={16} />}
                     {sortOrder === 'desc' && <SortDesc size={16} />}
@@ -160,16 +160,16 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
         <div className="space-y-3">
           <AnimatePresence mode="popLayout">
             {filteredLogins.length > 0 ? (
-              filteredLogins.map((login) => (
+              filteredLogins.map(login => (
                 <LoginItem key={login.id} data={login} onEdit={handleEdit} onDelete={handleDeleteClick} />
               ))
             ) : (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="py-12 text-center text-text-muted"
+                className="text-text-muted py-12 text-center"
               >
-                <Search className="mx-auto h-12 w-12 opacity-20 mb-4" />
+                <Search className="mx-auto mb-4 h-12 w-12 opacity-20" />
                 <p>No results found</p>
               </motion.div>
             )}
@@ -195,11 +195,11 @@ export const VaultManager = ({ logins }: { logins: LoginItemProps[] }) => {
         title="Delete credential"
         description="Are you sure you want to delete this credential? This action cannot be undone."
       >
-        <div className="flex justify-end gap-2 mt-4">
+        <div className="mt-4 flex justify-end gap-2">
           <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)} disabled={isDeleting}>
             Cancel
           </Button>
-          <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={confirmDelete} disabled={isDeleting}>
+          <Button className="bg-red-600 text-white hover:bg-red-700" onClick={confirmDelete} disabled={isDeleting}>
             {isDeleting ? 'Deleting...' : 'Delete'}
           </Button>
         </div>

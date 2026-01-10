@@ -21,13 +21,13 @@ export default function Error({ error, reset }: ErrorProps) {
   }
 
   return (
-    <div className="flex items-center justify-center p-4 min-h-100">
-      <Card variant="default" className="max-w-md mx-auto text-center border-red-500/20 shadow-xl">
-        <div className="text-red-500 mb-4 text-4xl" role="img" aria-label="Warning">
+    <div className="flex min-h-100 items-center justify-center p-4">
+      <Card variant="default" className="mx-auto max-w-md border-red-500/20 text-center shadow-xl">
+        <div className="mb-4 text-4xl text-red-500" role="img" aria-label="Warning">
           ⚠️
         </div>
-        <h2 className="text-xl font-bold mb-2 text-white">Something went wrong</h2>
-        <p className="text-gray-400 text-sm mb-6">
+        <h2 className="mb-2 text-xl font-bold text-foreground">Something went wrong</h2>
+        <p className="mb-6 text-sm text-text-muted">
           {error.message || 'An unexpected error occurred while processing the data.'}
         </p>
         <Button onClick={handleReset} variant="primary" className="w-full sm:w-auto">

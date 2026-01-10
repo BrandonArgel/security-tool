@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Menu, X, Plus } from 'lucide-react'
 import { Button, Card, Tooltip } from '@/components/ui'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { UserMenu } from './user-menu'
 import { NAV_ITEMS, AUTH_NAV_ITEMS } from './nav-config'
 import { NavLink } from './nav-link'
@@ -32,10 +33,10 @@ export const Navbar = () => {
         <Card
           variant="glass"
           padding="sm"
-          className="mx-auto flex w-full max-w-4xl items-center justify-between rounded-2xl border-white/5 bg-surface/80 backdrop-blur-xl"
+          className="bg-surface/80 mx-auto flex w-full max-w-4xl items-center justify-between rounded-2xl border-white/5 backdrop-blur-xl"
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 px-2 text-foreground transition-colors hover:text-primary">
+          <Link href="/" className="text-foreground hover:text-primary flex items-center gap-2 px-2 transition-colors">
             <Shield className="h-6 w-6" />
             <span className="hidden text-lg font-bold tracking-tight sm:inline-block">SecurityTool</span>
           </Link>
@@ -53,11 +54,13 @@ export const Navbar = () => {
           <div className="flex items-center gap-2">
             {isAuthenticated && (
               <Tooltip content="Add Login">
-                <Button size="icon" className="hidden rounded-full gap-2 md:flex" onClick={openAddLoginModal}>
+                <Button size="icon" className="hidden gap-2 rounded-full md:flex" onClick={openAddLoginModal}>
                   <Plus className="h-4 w-4" />
                 </Button>
               </Tooltip>
             )}
+
+            <ThemeToggle />
 
             {isAuthenticated ? (
               <UserMenu user={session?.user} />
@@ -88,7 +91,7 @@ export const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-x-0 top-22 z-30 px-4 md:hidden"
           >
-            <Card variant="glass" className="overflow-hidden border-white/5 bg-surface/95 backdrop-blur-xl">
+            <Card variant="glass" className="bg-surface/95 overflow-hidden border-white/5 backdrop-blur-xl">
               <nav className="flex flex-col gap-2 p-2">
                 {currentNavItems.map((item) => (
                   <Link
@@ -99,7 +102,7 @@ export const Navbar = () => {
                       'flex items-center rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                       pathname === item.href
                         ? 'bg-primary/10 text-primary'
-                        : 'text-text-muted hover:bg-white/5 hover:text-foreground'
+                        : 'text-text-muted hover:text-foreground hover:bg-surface-hover'
                     )}
                   >
                     {item.label}
@@ -112,7 +115,7 @@ export const Navbar = () => {
                       setIsMobileMenuOpen(false)
                       openAddLoginModal()
                     }}
-                    className="flex w-full items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium hover:bg-primary-hover transition-colors"
+                    className="hover:bg-primary-hover flex w-full items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium transition-colors"
                   >
                     <Plus className="h-4 w-4" />
                     Add Login

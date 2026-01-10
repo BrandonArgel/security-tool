@@ -24,7 +24,7 @@ export const Toggle = ({ className, enabled, setEnabled, id, label, description,
         aria-checked={enabled}
         onClick={() => setEnabled(!enabled)}
         className={cn(
-          'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+          'focus-visible:ring-primary focus-visible:ring-offset-background relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           enabled ? 'bg-primary' : 'bg-gray-500/50',
           className
         )}
@@ -44,13 +44,13 @@ export const Toggle = ({ className, enabled, setEnabled, id, label, description,
           <div className="flex items-center gap-2">
             {icon && <span className="text-muted-foreground">{icon}</span>}
             {label && (
-              <label htmlFor={id} className="font-medium text-foreground">
+              <label htmlFor={id} className="text-foreground font-medium">
                 {label}
               </label>
             )}
             {endIcon && <span className="text-muted-foreground">{endIcon}</span>}
           </div>
-          {description && <span className="text-sm text-muted-foreground">{description}</span>}
+          {description && <span className="text-muted-foreground text-sm">{description}</span>}
         </div>
       )}
     </div>

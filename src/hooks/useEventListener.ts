@@ -59,7 +59,7 @@ function useEventListener<
 
     if (!(targetElement && targetElement.addEventListener)) return
 
-    const listener: typeof handler = (event) => {
+    const listener: typeof handler = event => {
       savedHandler.current(event)
     }
 

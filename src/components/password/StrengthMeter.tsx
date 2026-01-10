@@ -17,13 +17,13 @@ const levelConfig: Record<SecurityLevel, { label: string; color: string }> = {
 export const StrengthMeter = ({ level, score }: StrengthMeterProps) => {
   return (
     <div className="space-y-2">
-      <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-text-muted">
+      <div className="text-text-muted flex justify-between text-xs font-bold tracking-widest uppercase">
         <span>Strength</span>
         <span className={cn('transition-colors', levelConfig[level].color.replace('bg-', 'text-'))}>
           {levelConfig[level].label}
         </span>
       </div>
-      <div className="flex gap-1.5 h-1.5">
+      <div className="flex h-1.5 gap-1.5">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}

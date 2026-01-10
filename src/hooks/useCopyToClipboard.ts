@@ -12,7 +12,7 @@ export function useCopyToClipboard(timeout: number = 2000): [CopiedValue, CopyFn
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const copy: CopyFn = useCallback(
-    async (text) => {
+    async text => {
       if (!navigator?.clipboard) {
         setError(new Error('Clipboard API not supported'))
         return false

@@ -42,20 +42,20 @@ export const Input = ({
   }
 
   const StartIcon = startIcon ? (
-    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-text" onClick={handleIconClick}>
+    <div className="text-text-muted absolute top-1/2 left-3 -translate-y-1/2 cursor-text" onClick={handleIconClick}>
       {startIcon}
     </div>
   ) : null
 
   return (
-    <div className="flex flex-col gap-1.5 w-full">
+    <div className="flex w-full flex-col gap-1.5">
       {label && (
-        <label htmlFor={id} className="text-xs font-bold text-gray-500 uppercase tracking-wider px-1">
+        <label htmlFor={id} className="text-text-subtle px-1 text-sm font-bold tracking-wider uppercase">
           {label}
         </label>
       )}
 
-      <div className="relative group">
+      <div className="group relative">
         {StartIcon}
 
         <input
@@ -63,14 +63,14 @@ export const Input = ({
           ref={handleRef}
           type={inputType}
           className={cn(
-            'w-full bg-surface border border-gray-700 rounded-md p-2 text-sm',
+            'bg-surface border-border w-full rounded-md border p-2 text-sm',
             'transition-all duration-200 outline-none',
             'select-none',
             'focus:ring-1 focus:ring-blue-500',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
+            'disabled:cursor-not-allowed disabled:opacity-50',
             startIcon && 'pl-9',
             (isPassword || endIcon) && 'pr-10',
-            error && 'focus:ring-red-500 border-red-500 text-red-500',
+            error && 'border-red-500 text-red-500 focus:ring-red-500',
             className
           )}
           {...props}
@@ -83,14 +83,14 @@ export const Input = ({
               variant="ghost"
               size="icon"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-gray-500 hover:text-white"
+              className="text-text-muted hover:text-foreground absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2"
             >
               {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
             </Button>
           </Tooltip>
         ) : endIcon ? (
           <div
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-text"
+            className="text-text-muted absolute top-1/2 right-3 -translate-y-1/2 cursor-text"
             onClick={handleIconClick}
           >
             {endIcon}
@@ -98,7 +98,7 @@ export const Input = ({
         ) : null}
       </div>
 
-      {error && <span className="text-[10px] text-red-500 font-medium italic px-1">{error}</span>}
+      {error && <span className="px-1 text-xs font-medium text-red-500 italic">{error}</span>}
     </div>
   )
 }

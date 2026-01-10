@@ -15,7 +15,7 @@ export const HistoryLog = ({ history, onClear }: HistoryLogProps) => {
   return (
     <div className="mt-6 space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] leading-8">Recent Passwords</h3>
+        <h3 className="text-text-muted text-xs leading-8 font-bold tracking-[0.2em] uppercase">Recent Passwords</h3>
 
         <AnimatePresence>
           {hasHistory && (
@@ -30,9 +30,9 @@ export const HistoryLog = ({ history, onClear }: HistoryLogProps) => {
                   variant="ghost"
                   size="icon"
                   onClick={onClear}
-                  className="p-0 text-text-muted hover:text-red-400 transition-colors"
+                  className="text-text-muted p-0 transition-colors hover:text-red-400"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
+                  <Trash2 className="h-3.5 w-3.5" />
                 </Button>
               </Tooltip>
             </motion.div>
@@ -41,10 +41,10 @@ export const HistoryLog = ({ history, onClear }: HistoryLogProps) => {
       </div>
 
       <div className="overflow-hidden rounded-xl">
-        <ul className="flex flex-col gap-2 relative">
+        <ul className="relative flex flex-col gap-2">
           <AnimatePresence mode="popLayout" initial={false}>
             {hasHistory ? (
-              items.map((pw) => (
+              items.map(pw => (
                 <motion.li
                   key={pw}
                   layout
@@ -76,7 +76,7 @@ export const HistoryLog = ({ history, onClear }: HistoryLogProps) => {
                   y: -10,
                   transition: { duration: 0.1 }
                 }}
-                className="text-center text-[11px] text-text-muted py-4 list-none"
+                className="text-text-muted list-none py-4 text-center text-sm"
               >
                 History is empty
               </motion.li>

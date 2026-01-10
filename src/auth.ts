@@ -17,7 +17,7 @@ const providers: Provider[] = [
 ]
 
 export const providerMap = providers
-  .map((provider) => {
+  .map(provider => {
     if (typeof provider === 'function') {
       const providerData = provider()
       return { id: providerData.id, name: providerData.name }
@@ -25,7 +25,7 @@ export const providerMap = providers
       return { id: provider.id, name: provider.name }
     }
   })
-  .filter((provider) => provider.id !== 'credentials') as { id: AuthProviderId; name: string }[]
+  .filter(provider => provider.id !== 'credentials') as { id: AuthProviderId; name: string }[]
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),

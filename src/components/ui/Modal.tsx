@@ -62,23 +62,23 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 px-4"
+            className="fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 px-4"
           >
             <div
               className={cn(
-                'relative w-full overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl max-h-[90vh] overflow-y-auto',
+                'bg-surface relative max-h-[90vh] w-full overflow-hidden overflow-y-auto rounded-2xl border border-white/10 shadow-2xl',
                 className
               )}
             >
-              <div className="flex items-center justify-between border-b border-border-subtle p-6">
+              <div className="border-border-subtle flex items-center justify-between border-b p-6">
                 <div>
-                  {title && <h2 className="text-xl font-semibold text-foreground">{title}</h2>}
-                  {description && <p className="mt-1 text-sm text-text-muted">{description}</p>}
+                  {title && <h2 className="text-foreground text-xl font-semibold">{title}</h2>}
+                  {description && <p className="text-text-muted mt-1 text-sm">{description}</p>}
                 </div>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 rounded-full text-text-muted hover:text-foreground"
+                  className="text-text-muted hover:text-foreground h-8 w-8 rounded-full"
                   onClick={onClose}
                 >
                   <X className="h-4 w-4" />

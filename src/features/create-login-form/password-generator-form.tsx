@@ -45,7 +45,7 @@ export const PasswordGeneratorForm = ({ onSuccess }: SavedLoginFormProps) => {
   }
 
   return (
-    <Card as="form" className="bg-background max-w-md mx-auto w-full" variant="outline">
+    <Card as="form" className="bg-background mx-auto w-full max-w-md" variant="outline">
       <CardHeader>
         <h2 className="text-xl font-bold">Generator</h2>
       </CardHeader>

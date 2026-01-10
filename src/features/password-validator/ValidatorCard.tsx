@@ -20,20 +20,20 @@ export const ValidatorCard = () => {
   const suggestions = useMemo(() => getPasswordFeedback(debouncedPassword), [debouncedPassword])
 
   return (
-    <Card className="max-w-md mx-auto w-full" variant="outline">
+    <Card className="mx-auto w-full max-w-md" variant="outline">
       <CardHeader>
         <h2 className="text-xl font-bold">Password Validator</h2>
       </CardHeader>
 
       <CardContent>
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <Input
             type="password"
             placeholder="Enter password to validate"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
-          <div className="h-10 w-10 flex items-center justify-center bg-surface border border-border rounded-lg font-mono text-sm text-primary">
+          <div className="bg-surface border-border text-primary flex h-10 w-10 items-center justify-center rounded-lg border font-mono text-sm">
             {password.length}
           </div>
         </div>

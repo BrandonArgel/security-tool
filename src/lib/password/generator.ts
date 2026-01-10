@@ -6,7 +6,7 @@ const getRandomChar = (str: string) => str[getPerfectlySecureRandomNumber(0, str
 const filterAmbiguous = (str: string) =>
   str
     .split('')
-    .filter((c) => !CHARACTER_SETS.ambiguous.includes(c))
+    .filter(c => !CHARACTER_SETS.ambiguous.includes(c))
     .join('')
 
 export const generatePassword = (config: PasswordConfig): string => {
@@ -86,7 +86,7 @@ const shuffleAndFix = (arr: string[], config: PasswordConfig): string => {
 
 const isSequenceAt = (arr: string[], i: number): boolean => {
   if (i < 2) return false
-  const codes = [arr[i - 2], arr[i - 1], arr[i]].map((c) => c.charCodeAt(0))
+  const codes = [arr[i - 2], arr[i - 1], arr[i]].map(c => c.charCodeAt(0))
   return (
     (codes[1] === codes[0] + 1 && codes[2] === codes[1] + 1) || (codes[1] === codes[0] - 1 && codes[2] === codes[1] - 1)
   )
