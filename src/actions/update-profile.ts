@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 const updateProfileSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters')
+  name: z.string().min(3, 'Name must be at least 3 characters')
 })
 
 export type UpdateProfileSchema = z.infer<typeof updateProfileSchema>
@@ -19,7 +19,7 @@ export async function updateProfile(data: UpdateProfileSchema) {
 
   const result = updateProfileSchema.safeParse(data)
   if (!result.success) {
-    throw new Error(result.error.errors[0].message)
+    throw new Error(result.error.issues[0].message)
   }
 
   try {
