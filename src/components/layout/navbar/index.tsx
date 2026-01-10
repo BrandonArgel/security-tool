@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
@@ -12,11 +12,14 @@ import { UserMenu } from './user-menu'
 import { NAV_ITEMS, AUTH_NAV_ITEMS } from './nav-config'
 import { NavLink } from './nav-link'
 import { useModal } from '@/components/providers'
+import { useClickOutside } from '@/hooks'
 import { cn } from '@/lib'
 
 export const Navbar = () => {
-  const { data: session, status } = useSession()
   const pathname = usePathname()
+  const { data: session, status } = useSession()
+  const hamburgerMenuIconRef = useRef<HTMLButtonElement | null>(null)
+  const menuOverlayRef = useRef<HTMLDivElement | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Use the global modal context
@@ -26,6 +29,14 @@ export const Navbar = () => {
   const currentNavItems = isAuthenticated ? [...NAV_ITEMS, ...AUTH_NAV_ITEMS] : NAV_ITEMS
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+
+  const handleClickOutside = () => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false)
+    }
+  }
+
+  useClickOutside<HTMLElement>([hamburgerMenuIconRef, menuOverlayRef], handleClickOutside)
 
   return (
     <>
@@ -43,7 +54,7 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-1 md:flex">
-            {currentNavItems.map((item) => (
+            {currentNavItems.map(item => (
               <NavLink key={item.href} href={item.href} isActive={pathname === item.href}>
                 {item.label}
               </NavLink>
@@ -75,7 +86,13 @@ export const Navbar = () => {
             )}
 
             {/* Mobile Menu Button */}
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMobileMenu}>
+            <Button
+              ref={hamburgerMenuIconRef}
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={toggleMobileMenu}
+            >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -91,9 +108,13 @@ export const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-x-0 top-22 z-30 px-4 md:hidden"
           >
-            <Card variant="glass" className="bg-surface/95 overflow-hidden border-white/5 backdrop-blur-xl">
+            <Card
+              ref={menuOverlayRef}
+              variant="glass"
+              className="bg-surface/95 overflow-hidden border-white/5 backdrop-blur-xl"
+            >
               <nav className="flex flex-col gap-2 p-2">
-                {currentNavItems.map((item) => (
+                {currentNavItems.map(item => (
                   <Link
                     key={item.href}
                     href={item.href}
