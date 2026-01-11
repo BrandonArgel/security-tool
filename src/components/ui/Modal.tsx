@@ -66,7 +66,7 @@ export const Modal = ({ isOpen, onClose, children, title, description, className
           >
             <div
               className={cn(
-                'bg-surface relative max-h-[90vh] w-full overflow-hidden overflow-y-auto rounded-2xl border border-white/10 shadow-2xl',
+                'bg-surface relative max-h-[90dvh] w-full overflow-hidden overflow-y-auto rounded-2xl border border-white/10 shadow-2xl',
                 className
               )}
             >

@@ -43,7 +43,7 @@ export default async function LogInPage(props: { searchParams: Promise<{ callbac
   const { callbackUrl } = await props.searchParams
 
   return (
-    <div className="animate-slide-in flex min-h-[60vh] flex-col items-center justify-center py-12">
+    <div className="animate-slide-in flex min-h-[60dvh] flex-col items-center justify-center py-12">
       <div className="mb-8 flex flex-col items-center gap-4 text-center">
         <div className="bg-primary/10 text-primary ring-primary/20 flex h-16 w-16 items-center justify-center rounded-2xl ring-1">
           <Shield className="h-8 w-8" />
@@ -57,7 +57,7 @@ export default async function LogInPage(props: { searchParams: Promise<{ callbac
       <Card className="w-full max-w-sm" variant="default" shadow="md">
         <CardContent className="pt-6">
           <div className="grid gap-4">
-            {Object.values(providerMap).map((provider) => {
+            {Object.values(providerMap).map(provider => {
               const uiConfig = PROVIDER_UI_CONFIG[provider.id]
 
               const Icon = uiConfig?.icon
