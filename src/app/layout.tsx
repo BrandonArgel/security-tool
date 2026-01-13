@@ -5,9 +5,27 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL('http://localhost:3000')
+
 export const metadata: Metadata = {
   title: 'Security Tool',
   description: 'Securely manage your passwords and sensitive information with this advanced security tool.',
+  metadataBase: baseUrl,
+  openGraph: {
+    title: 'Security Tool', // Optional: inherits from `title` above
+    description: 'Securely manage your passwords and sensitive information with this advanced security tool.', // Optional: inherits from `description` above
+    url: '/', // Defines the canonical URL
+    siteName: 'Security Tool', // Optional: site name
+    locale: 'en_US', // Optional: locale
+    type: 'website' // Optional: defaults to 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Security Tool',
+    description: 'Securely manage your passwords...'
+  },
   icons: {
     icon: [
       { url: '/favicon.ico' },
