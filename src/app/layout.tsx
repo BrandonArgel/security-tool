@@ -10,21 +10,23 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
   : new URL('http://localhost:3000')
 
 export const metadata: Metadata = {
-  title: 'Security Tool',
-  description: 'Securely manage your passwords and sensitive information with this advanced security tool.',
+  title: 'Security Tool | Secure Password Manager & Encrypted Vault',
+  description:
+    'Securely manage your passwords and sensitive data with Security Tool. Experience advanced local encryption, zero tracking, and maximum privacy for your information.',
   metadataBase: baseUrl,
   openGraph: {
-    title: 'Security Tool', // Optional: inherits from `title` above
-    description: 'Securely manage your passwords and sensitive information with this advanced security tool.', // Optional: inherits from `description` above
+    title: 'Security Tool | Secure Password Manager & Encrypted Vault', // Optional: inherits from `title` above
+    description:
+      'Securely manage your passwords and sensitive data with Security Tool. Experience advanced local encryption, zero tracking, and maximum privacy for your information.', // Optional: inherits from `description` above
     url: '/', // Defines the canonical URL
     siteName: 'Security Tool', // Optional: site name
     locale: 'en_US', // Optional: locale
     type: 'website' // Optional: defaults to 'website'
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Security Tool',
-    description: 'Securely manage your passwords...'
+    card: 'summary'
+    // title: '', // Optional: inherits from `title` above
+    // description: '' // Optional: inherits from `description` above
   },
   icons: {
     icon: [
