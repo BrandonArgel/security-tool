@@ -5,13 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ReactNode, useState } from 'react'
 import { cn } from '@/lib'
 
-// Extendemos para permitir asChild y otras props estándar si fuera necesario
 interface TooltipProps extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root> {
   children: ReactNode
   content: ReactNode
   className?: string
-  // Si quisieras que el Trigger fuera asChild desde afuera:
-  asChild?: boolean 
+  asChild?: boolean
 }
 
 export const Tooltip = ({ children, content, className, ...props }: TooltipProps) => {
@@ -24,18 +22,14 @@ export const Tooltip = ({ children, content, className, ...props }: TooltipProps
 
   return (
     <TooltipPrimitive.Provider delayDuration={200}>
-      {/* Pasamos las props como defaultOpen, etc. */}
       <TooltipPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
         <TooltipPrimitive.Trigger
           asChild
           onPointerDown={e => {
             if (e.pointerType === 'touch') {
-              // No prevenimos el default aquí para dejar que el radio se seleccione
               setOpen(prev => !prev)
             }
           }}
-          // ELIMINADO: onClick={e => e.preventDefault()} 
-          // Este preventDefault era lo que mataba la interacción del RadioGroup
         >
           {children}
         </TooltipPrimitive.Trigger>
@@ -49,9 +43,8 @@ export const Tooltip = ({ children, content, className, ...props }: TooltipProps
                 align="center"
                 sideOffset={8 + 1}
                 collisionPadding={10}
-                // Evita que el tooltip se cierre mal en móviles
                 onPointerDownOutside={e => {
-                  const target = e.target as HTMLElement;
+                  const target = e.target as HTMLElement
                   if (target?.closest('[data-radix-tooltip-trigger]')) {
                     e.preventDefault()
                   } else {
@@ -59,7 +52,7 @@ export const Tooltip = ({ children, content, className, ...props }: TooltipProps
                   }
                 }}
                 className={cn(
-                  'bg-surface/95 z-[100] max-w-70 rounded-lg px-3 py-2 backdrop-blur-md',
+                  'bg-surface/95 z-100 max-w-70 rounded-lg px-3 py-2 backdrop-blur-md',
                   'text-foreground border-border border text-sm font-medium shadow-2xl',
                   className
                 )}

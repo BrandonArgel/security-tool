@@ -1,7 +1,7 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import { Card, CardHeader, CardContent } from '@/components/ui'
-import { User, Mail, Shield, Calendar } from 'lucide-react'
+import { Mail, Shield, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { EditProfileTrigger } from './edit-profile-trigger'
 
@@ -20,10 +20,10 @@ export default async function ProfilePage() {
 
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-4">
-            <div className="border-primary/20 bg-surface-hover relative h-20 w-20 overflow-hidden rounded-full border-2">
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <div className="border-primary/20 bg-surface-hover relative min-h-20 min-w-20 overflow-hidden rounded-full border-2">
               {user.image ? (
-                <Image src={user.image} alt={user.name || 'User'} fill className="object-cover" />
+                <Image src={user.image} width={100} height={100} alt={user.name || 'User'} className="object-cover" />
               ) : (
                 <div className="text-text-muted flex h-full w-full items-center justify-center text-2xl font-bold">
                   {user.name?.charAt(0) || 'U'}
