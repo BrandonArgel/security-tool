@@ -15,6 +15,8 @@ const themeOptions: ColorOption[] = [
 export function ThemeColorSelector() {
   const { color, setColor } = useThemeColor()
 
+  console.log({ color })
+
   return (
     <div className="bg-card max-w-md space-y-6 rounded-lg p-8">
       <div>

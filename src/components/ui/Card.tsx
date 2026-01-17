@@ -8,7 +8,7 @@ const cardVariants = cva('rounded-xl border transition-all duration-300', {
     variant: {
       default: 'bg-surface border-border-subtle',
       secondary: 'bg-surface-hover border-border',
-      glass: 'bg-surface/50 backdrop-blur-md border-white/10 dark:bg-white/5',
+      glass: 'bg-surface/50 backdrop-blur-md border-white/10',
       outline: 'bg-transparent border-border',
       ghost: 'bg-transparent border-transparent'
     },
