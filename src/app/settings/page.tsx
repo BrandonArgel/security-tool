@@ -1,15 +1,10 @@
 import { Card, CardContent, Button } from '@/components/ui'
 import { auth } from '@/auth'
-import { redirect } from 'next/navigation'
 import { Bell, Shield, Key } from 'lucide-react'
 import { ThemeColorSelector } from '@/components/ui/ThemeColorSelector'
 
 export default async function SettingsPage() {
   const session = await auth()
-
-  if (!session) {
-    redirect('/login')
-  }
 
   return (
     <div className="container mx-auto max-w-2xl py-8">
@@ -26,72 +21,76 @@ export default async function SettingsPage() {
           </Card>
         </section>
 
-        <section className="pointer-events-none opacity-50">
-          <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
-            <SecurityIcon className="h-5 w-5 opacity-70" />
-            Security (soon)
-          </h2>
-          <Card>
-            <CardContent className="space-y-4 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-emerald-500/10 p-2 text-emerald-500">
-                    <Shield size={20} />
+        {session && (
+          <>
+            <section className="pointer-events-none opacity-50">
+              <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
+                <SecurityIcon className="h-5 w-5 opacity-70" />
+                Security (soon)
+              </h2>
+              <Card>
+                <CardContent className="space-y-4 py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-full bg-emerald-500/10 p-2 text-emerald-500">
+                        <Shield size={20} />
+                      </div>
+                      <div>
+                        <p className="text-foreground font-medium">Two-Factor Authentication</p>
+                        <p className="text-text-muted text-sm">Add an extra layer of security</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      Enable
+                    </Button>
                   </div>
-                  <div>
-                    <p className="text-foreground font-medium">Two-Factor Authentication</p>
-                    <p className="text-text-muted text-sm">Add an extra layer of security</p>
-                  </div>
-                </div>
-                <Button variant="outline" size="sm">
-                  Enable
-                </Button>
-              </div>
 
-              <div className="bg-border-subtle h-px" />
+                  <div className="bg-border-subtle h-px" />
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-amber-500/10 p-2 text-amber-500">
-                    <Key size={20} />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-full bg-amber-500/10 p-2 text-amber-500">
+                        <Key size={20} />
+                      </div>
+                      <div>
+                        <p className="text-foreground font-medium">Change Master Password</p>
+                        <p className="text-text-muted text-sm">Update your main vault password</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      Update
+                    </Button>
                   </div>
-                  <div>
-                    <p className="text-foreground font-medium">Change Master Password</p>
-                    <p className="text-text-muted text-sm">Update your main vault password</p>
-                  </div>
-                </div>
-                <Button variant="outline" size="sm">
-                  Update
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
+                </CardContent>
+              </Card>
+            </section>
 
-        <section className="pointer-events-none opacity-50">
-          <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
-            <BellIcon className="h-5 w-5 opacity-70" />
-            Notifications (soon)
-          </h2>
-          <Card>
-            <CardContent className="py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-blue-500/10 p-2 text-blue-500">
-                    <Bell size={20} />
+            <section className="pointer-events-none opacity-50">
+              <h2 className="text-foreground mb-4 flex items-center gap-2 text-xl font-semibold">
+                <BellIcon className="h-5 w-5 opacity-70" />
+                Notifications (soon)
+              </h2>
+              <Card>
+                <CardContent className="py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-full bg-blue-500/10 p-2 text-blue-500">
+                        <Bell size={20} />
+                      </div>
+                      <div>
+                        <p className="text-foreground font-medium">Security Alerts</p>
+                        <p className="text-text-muted text-sm">Get notified about suspicious activity</p>
+                      </div>
+                    </div>
+                    <div className="bg-primary/20 relative h-6 w-11 cursor-pointer rounded-full">
+                      <div className="bg-primary absolute top-1 right-1 h-4 w-4 rounded-full shadow-sm" />
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-foreground font-medium">Security Alerts</p>
-                    <p className="text-text-muted text-sm">Get notified about suspicious activity</p>
-                  </div>
-                </div>
-                <div className="bg-primary/20 relative h-6 w-11 cursor-pointer rounded-full">
-                  <div className="bg-primary absolute top-1 right-1 h-4 w-4 rounded-full shadow-sm" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
+                </CardContent>
+              </Card>
+            </section>
+          </>
+        )}
       </div>
     </div>
   )

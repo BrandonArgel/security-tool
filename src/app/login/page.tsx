@@ -10,12 +10,12 @@ import { cn } from '@/lib'
 
 const SIGNIN_ERROR_URL = '/error'
 
-const buttonVariants = cva('w-full relative', {
+const buttonVariants = cva('w-full relative bg-surface-hover text-foreground hover:bg-surface-active', {
   variants: {
     provider: {
-      google: 'bg-surface-hover text-foreground hover:bg-surface-active border border-border-strong',
-      github: 'bg-surface-hover text-foreground hover:bg-surface-active border border-border-strong',
-      default: 'bg-surface-hover text-foreground hover:bg-surface-active'
+      google: 'border border-border-strong',
+      github: 'border border-border-strong',
+      default: ''
     }
   },
   defaultVariants: {

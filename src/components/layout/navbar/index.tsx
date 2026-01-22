@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Menu, X, Plus } from 'lucide-react'
+import { Shield, Menu, X, Plus, Settings } from 'lucide-react'
 import { Button, Card, Tooltip } from '@/components/ui'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { UserMenu } from './user-menu'
@@ -63,15 +63,23 @@ export const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            {isAuthenticated && (
+            <ThemeToggle />
+            
+            {isAuthenticated ? (
               <Tooltip content="Add Login">
                 <Button size="icon" className="hidden gap-2 rounded-full md:flex" onClick={openAddLoginModal}>
                   <Plus className="h-4 w-4" />
                 </Button>
               </Tooltip>
+            ) : (
+              <Tooltip content="Settings">
+                <Link href="/settings">
+                  <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full" aria-label="Settings">
+                    <Settings />
+                  </Button>
+                </Link>
+              </Tooltip>
             )}
-
-            <ThemeToggle />
 
             {isAuthenticated ? (
               <UserMenu user={session?.user} />
