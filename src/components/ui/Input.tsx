@@ -66,7 +66,7 @@ export const Input = ({
             'bg-surface border-border w-full rounded-md border p-2 text-sm',
             'transition-all duration-200 outline-none',
             'select-none',
-            'focus:ring-1 focus:ring-blue-500',
+            'focus:ring-1 focus:ring-primary focus:border-primary',
             'disabled:cursor-not-allowed disabled:opacity-50',
             startIcon && 'pl-9',
             (isPassword || endIcon) && 'pr-10',

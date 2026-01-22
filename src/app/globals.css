@@ -234,6 +234,8 @@
   }
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 .no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
