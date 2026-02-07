@@ -57,7 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <ThemeInitializer />
             <ModalProvider>
               <Navbar />
-              <main className="w-full max-w-2xl flex-1 px-4">{children}</main>
+              <main className="w-full max-w-4xl flex-1 px-4">{children}</main>
             </ModalProvider>
           </ThemeProvider>
         </AuthProvider>
