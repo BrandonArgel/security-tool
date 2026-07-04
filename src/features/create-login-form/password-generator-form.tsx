@@ -8,8 +8,7 @@ import {
   OptionsSection,
   PasswordDisplay,
   PasswordSuggestions,
-  StrengthMeter,
-  VisibilitySelector
+  StrengthMeter
 } from '@components/password'
 import { useModal } from '@/components'
 import { MIN_LENGTH, MAX_LENGTH } from '@/lib/password/types'
@@ -34,7 +33,6 @@ export const PasswordGeneratorForm = ({ onSuccess }: SavedLoginFormProps) => {
     handleMinNumbersChange,
     handleMinSpecialChange,
     handleOptionChange,
-    toggleDisplay,
     suggestions
   } = useGenerator()
 
