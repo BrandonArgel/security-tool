@@ -12,7 +12,9 @@ interface PasswordDisplayProps {
 }
 
 export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps) => {
-  const [copied, copy, error] = useCopyToClipboard()
+  const [copied, copy, error, clearCopiedText] = useCopyToClipboard()
+
+  console.log('PasswordDisplay rendered', { copied })
 
   const handleCopy = async (text: string) => {
     if (!text) return
@@ -22,6 +24,11 @@ export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps
     } else if (error) {
       toast.error(`Error: ${error.message}`)
     }
+  }
+
+  const handleRegenerate = () => {
+    onRegenerate()
+    clearCopiedText()
   }
 
   return (
@@ -39,13 +46,14 @@ export const PasswordDisplay = ({ password, onRegenerate }: PasswordDisplayProps
 
       <div className="flex items-center gap-2">
         <Tooltip content="Regenerate password">
-          <Button variant="ghost" size="icon" onClick={onRegenerate} disabled={!password}>
+          <Button type="button" variant="ghost" size="icon" onClick={handleRegenerate} disabled={!password}>
             <RefreshCcwDot className="h-4 w-4 transition-transform duration-250 group-hover:rotate-180" />
           </Button>
         </Tooltip>
 
         <Tooltip content="Copy password to clipboard">
           <Button
+            type="button"
             variant="ghost"
             size="icon"
             className={cn(copied && 'animate-copy-pop')}

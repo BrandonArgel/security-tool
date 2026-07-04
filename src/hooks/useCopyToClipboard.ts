@@ -5,8 +5,9 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 type CopiedValue = string | null
 type CopyFn = (_text: string) => Promise<boolean>
 type CopyError = Error | null
+type ClearCopiedTextFn = () => void
 
-export function useCopyToClipboard(timeout: number = 2000): [CopiedValue, CopyFn, CopyError] {
+export function useCopyToClipboard(timeout: number = 2000): [CopiedValue, CopyFn, CopyError, ClearCopiedTextFn] {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null)
   const [error, setError] = useState<CopyError>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -45,6 +46,13 @@ export function useCopyToClipboard(timeout: number = 2000): [CopiedValue, CopyFn
     [timeout]
   )
 
+  const clearCopiedText = useCallback(() => {
+    setCopiedText(null)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -53,5 +61,5 @@ export function useCopyToClipboard(timeout: number = 2000): [CopiedValue, CopyFn
     }
   }, [])
 
-  return [copiedText, copy, error]
+  return [copiedText, copy, error, clearCopiedText]
 }
