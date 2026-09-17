@@ -18,5 +18,17 @@ jobs:
           -H "apikey: ${{ secrets.SUPABASE_SECRET_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET_KEY }}"
 
-      - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@v2
+      - name: Prevent Action Suspension
+        run: |
+          LAST_COMMIT_DATE=$(git log -1 --format=%ct)
+          CURRENT_DATE=$(date +%s)
+          DAYS_SINCE_COMMIT=$(( (CURRENT_DATE - LAST_COMMIT_DATE) / 86400 ))
+
+          if [ $DAYS_SINCE_COMMIT -gt 50 ]; then
+            git config --global user.name 'GitHub Action'
+            git config --global user.email 'action@github.com'
+            git commit --allow-empty -m "chore: keepalive commit to prevent suspension"
+            git push
+          else
+            echo "Last commit was $DAYS_SINCE_COMMIT days ago. No keepalive required."
+          fi
